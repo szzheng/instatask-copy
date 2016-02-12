@@ -31,7 +31,7 @@ var projects_json = require('./projects.json');
 models.Project
   .find()
   .remove()
-  .exec(onceClear); // callback to continue at
+  .exec(); // callback to continue at
 
 models.User
   .find()
@@ -42,30 +42,4 @@ models.Task
   .find()
   .remove()
   .exec();
-
-// Step 3: load the data from the JSON file
-function onceClear(err) {
-  if(err) console.log(err);
-
-  // loop over the projects, construct and save an object from each one
-  // Note that we don't care what order these saves are happening in...
-  var to_save_count = projects_json.length;
-  for(var i=0; i<projects_json.length; i++) {
-    var json = projects_json[i];
-    var proj = new models.Project(json);
-
-    proj.save(function(err, proj) {
-      if(err) console.log(err);
-
-      to_save_count--;
-      console.log(to_save_count + ' left to save');
-      if(to_save_count <= 0) {
-        console.log('DONE');
-        // The script won't terminate until the 
-        // connection to the database is closed
-        mongoose.connection.close()
-      }
-    });
-  }
-}
 
