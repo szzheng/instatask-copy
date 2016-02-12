@@ -5,9 +5,12 @@
 	<title>Instatask</title>	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+	<!--<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">-->
 	<link href="/css/introHCI.css" rel="stylesheet">
+	<link href="/css/normalize.css" rel="stylesheet">
+	<link href="css/skeleton.css" rel="stylesheet">
+	<link href="css/signup.css" rel="stylesheet">
 	<!-- this is a comment in HTML -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -26,19 +29,35 @@
     
 
 	<div class="container">
-		<h1>Instastart</h1>
+		<h1 class = "center">Instastart</h1>
 
-		<h2>Sign Up</h2>
-		<form action="signup" method="post" >
-		  <input name="name" type="text" placeholder="name"></input>
-          <input name="email" type="text" placeholder="email"></input>
-          <input name="pass" type="password" placeholder="password"></input>
-          <input name="cpass" type="password" placeholder="confirm password"></input>
-          <input type="submit" value="Signup" />
-		</form>
+		<div class ="form row">
+			<h5>Sign Up</h5>		
+			<form action="signup" method="post" >
+				<div class = "twelve columns">
+				<div class = 'twelve columns'>
+			  <input name="name" type="text" placeholder="name"></input>
+			    </div>
+			  	<div class = 'twelve columns'>
+	          <input name="email" type="text" placeholder="email"></input>
+	            </div>
+	          <div class = 'twelve columns'>
+	          <input name="pass" type="password" placeholder="password"></input>
+	            </div>
+	          <div class = 'twelve columns'>
+	          <input name="cpass" type="password" placeholder="confirm password"></input>
+	            </div>
+	          <div class = 'twelve columns'>
+	          	<input type="submit" value="Signup" class = "button-primary"/>
+	        </div>
+	      </div>
+			</form>
+		</div>
 
-		<h3>Already have an account?</h3>
-		<a href="/login"><button>Login</button></a>
+		<h5>Already have an account?</h5>
+		<div class = "align">
+			<a href="/login"><button class="button button-primary">Login</button></a>
+		</div>
 	</div>
 </body>
 </html>

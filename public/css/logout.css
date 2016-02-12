@@ -1,0 +1,24 @@
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans:400,300,300italic,400italic,500,500italic,700,700italic);
+
+html{
+	border-top: 1px solid #16a085;
+}
+
+h1{
+	text-align: center;
+	padding-top: 8%;
+	font-family: 'Fira Sans', sans-serif;
+}
+
+.align{
+	text-align: center;
+}
+
+h5, h4{
+	font-family: 'Fira Sans';
+	text-align: center;
+}
+
+.container{
+	margin-top:  10%;
+}
