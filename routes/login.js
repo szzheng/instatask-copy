@@ -58,3 +58,9 @@ exports.logoutPage = function(req, res) {
 exports.welcomePage = function(req, res) {
     res.render('welcome');
 }
+
+exports.settingsPage = function(req, res) {
+
+
+    res.render('settings');
+}
