@@ -5,19 +5,13 @@
 	<title>Instatask</title>	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+	<!--<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">-->
 	<link href="/css/introHCI.css" rel="stylesheet">
-	<!-- this is a comment in HTML -->
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->  
-
-    <script src="https://code.jquery.com/jquery.js"></script>
+  <link href="/css/normalize.css" rel="stylesheet">
+  <link href="/css/skeleton.css" rel="stylesheet">
+  <link href="/css/edit.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/introHCI.js"></script>      
 </head>
@@ -27,6 +21,7 @@
 
 		<h1>Instastart</h1>
 
+    <div class = "form">
 		<h3>Edit Task</h3>
 
 		<form action="{{ task._id }}" method="post">
@@ -42,11 +37,11 @@
 
 			<br><br>
           <input type="hidden" name="tofilter" value="true">
-          <input type="submit" value="Update Task" />
+          <input class = "button-primary" type="submit" value="Update Task" />
     </form>
     <br>
-    <button onclick="deleteTask('{{ task._id }}')">Delete Task</button>
+    <button class = "button-primary" onclick="deleteTask('{{ task._id }}')">Delete Task</button>
 	</div>
-
+  </div>
 </body>
 </html>

@@ -6,7 +6,7 @@ html{
 }
 
 body{
-	padding-top: 8%;
+	padding-top: 5%;
 }
 .center{
 	text-align: center;
@@ -19,13 +19,28 @@ body{
 	border: 1px solid rgba(	39, 174, 96);
 }
 
+.space{
+	margin-left: 20px;
+}
+
 .container{
 	font-family: 'Fira Sans', sans-serif;
 }
 
-h5{padding-top: 20px;
-	text-align: center;}
+.filter{
+	background-color:rgba(46,204,113,0.9);
+	padding: 20px;
+	border: 1px solid rgba(46,204,113);
+	border-radius: 5px;
+}
 
-.align{
-	text-align: center;
+h4{text-transform: uppercase; letter-spacing: 1px;}
+
+.task{
+	border-top: 10px solid #16a085;
+	border-left: 1px solid #16a085;
+	border-right: 1px solid #16a085;
+	border-bottom: 1px solid #16a085;
+	border-radius: 5px;
+	padding: 15px;
 }

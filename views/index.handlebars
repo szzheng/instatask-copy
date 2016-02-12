@@ -5,9 +5,12 @@
 	<title>Instatask</title>	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+	<!--<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">-->
 	<link href="/css/introHCI.css" rel="stylesheet">
+  <link href="/css/normalize.css" rel="stylesheet">
+  <link href="css/skeleton.css" rel="stylesheet">
+  <link href="css/index.css" rel="stylesheet">
 	<!-- this is a comment in HTML -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -29,11 +32,11 @@
     <div class="container">
 
 	<h1>Instastart</h1>
-    <a href="/settings"><button>Settings</button></a><a href="/logout"><button>Logout</button></a>
+    <a href="/settings"><button class = "button-primary">Settings</button></a><a href="/logout"><button class = "button-primary space">Logout</button></a>
 
 
 
-    <form action="/" method="post" style="border:1px solid #AAA; padding:10px;">
+    <form action="/" method="post" class = "filter">
     	<h4>Filter:</h4>
     	Status: <select name="status"><option value="in progress">in progress</option><option value="completed" {{#if ff.stat2}}selected{{/if}}>completed</option></select></a><br>
     	Location: <select name="location">
@@ -63,7 +66,7 @@
 
   <br>
     <input type="hidden" name="tofilter" value="true">
-    <input type="submit" value="Filter" />
+    <input type="submit" class = "button-primary" value="Filter" />
 
 
     </form>
@@ -73,14 +76,14 @@
     {{/if}}
 
     {{#each tasks}}
-    <div class="task" id="task{{id}}" style="border:1px solid #AAA; padding:10px;"> 
+    <div class="task" id="task{{id}}"> 
 		<h4>{{ title }}</h4>
 		<p>Category: {{ category }}</p>
 		<p>Location: {{ location }}</p>
 		<p>Difficulty: {{ difficulty }}</p>
 		<p>Duration: {{ duration }} hours</p>
-		<a href="/task/{{ id }}"><button>Edit</button></a>
-		<button onclick="complete('{{id}}')">Completed</button>
+		<a href="/task/{{ id }}"><button class = "button-primary">Edit</button></a>
+		<button class = "button-primary" onclick="complete('{{id}}')" class = "space">Completed</button>
 
 	</div>
     
@@ -88,7 +91,7 @@
 
 
     <br>
-    <a href="/add"><h4>Add a new task</h4></a>
+    <a href="/add"><button class = "button-primary">Add a new task</button></a>
     
 
 
