@@ -75,3 +75,8 @@ function initializePage() {
 	});
 }
 
+function complete(id) {
+	$.post('/complete', {'id': id}, function (data) {
+		$('#task' + id).hide(700);
+	});
+}

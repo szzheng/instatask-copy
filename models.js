@@ -1,6 +1,8 @@
 
 var Mongoose = require('mongoose');
 
+var Schema = Mongoose.Schema,
+    ObjectId = Schema.ObjectId;
 
 var ProjectSchema = new Mongoose.Schema({
   // fields are defined here
@@ -27,10 +29,12 @@ var TaskSchema = new Mongoose.Schema({
 	"location": String,
 	"difficulty": String,
 	"duration": Number,
-    "category": String
+    "category": String,
+    "status": String,
+    "owner": ObjectId
 });
 
-exports.User = Mongoose.model('Task', UserSchema);
+exports.Task = Mongoose.model('Task', TaskSchema);
 
 
 

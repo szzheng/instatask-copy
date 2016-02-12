@@ -12,15 +12,18 @@ exports.view = function(req, res){
     if (!req.session.user) {
        res.redirect("/login");
     } else {
-       models.Project
-		.find()
-		.sort('date')
-		.exec(renderProjects);
+    	/*
+    	models.User.find().exec(function(err, us) {console.log(us); res.render('index');});
+    	*/
+       models.Task
+		.find({'owner':req.session.user._id, "status": "in progress"})
+		.exec(renderTasks); 
     }
     
 
-	function renderProjects(err, projects) {
-		res.render('index', { 'projects': projects });
+	function renderTasks(err, tasks) {
+		console.log(tasks);
+		res.render('index', { 'tasks': tasks });
 	}
 
 };

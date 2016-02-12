@@ -33,6 +33,16 @@ models.Project
   .remove()
   .exec(onceClear); // callback to continue at
 
+models.User
+  .find()
+  .remove()
+  .exec();
+
+models.Task
+  .find()
+  .remove()
+  .exec();
+
 // Step 3: load the data from the JSON file
 function onceClear(err) {
   if(err) console.log(err);

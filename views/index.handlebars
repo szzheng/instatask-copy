@@ -8,8 +8,14 @@
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">
 	<link href="/css/introHCI.css" rel="stylesheet">
-	<link href="/css/normalize.css" rel="stylesheet">
-    <link href="css/skeleton.css" rel="stylesheet">
+	<!-- this is a comment in HTML -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->  
 
     <script src="https://code.jquery.com/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
@@ -20,13 +26,29 @@
     <div class="container">
 
 	<h1>Instastart</h1>
-    <a href="/settings"><button>Settings</button></a><a href="/logout">
+    <a href="/settings"><button>Settings</button></a><a href="/logout"><button>Logout</button></a>
 
-    <button>Logout</button></a>
-    
+	{{#if notification}}
+    <div>{{ notification }}</div>
+    {{/if}}
+
+    {{#each tasks}}
+
+    <div class="task" id="task{{id}}" style="border:1px solid #AAA; padding:10px;"> 
+		<h4>{{ title }}</h4>
+		<p>Category: {{ category }}</p>
+		<p>Location: {{ location }}</p>
+		<p>Difficulty: {{ difficulty }}</p>
+		<p>Duration: {{ duration }} hours</p>
+		<button onclick="complete('{{id}}')">Completed</button>
+	</div>
+
+    {{/each}}
+
+
     <br>
     <a href="/add"><h4>Add a new task</h4></a>
-
+    
 
 
 
