@@ -80,3 +80,9 @@ function complete(id) {
 		$('#task' + id).hide(700);
 	});
 }
+
+function deleteTask(id) {
+	$.post('/delete', {'id': id}, function (data) {
+		window.location = "/";
+	});
+}

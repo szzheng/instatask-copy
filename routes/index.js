@@ -15,8 +15,9 @@ exports.view = function(req, res){
     	/*
     	models.User.find().exec(function(err, us) {console.log(us); res.render('index');});
     	*/
+       var filters = {'owner':req.session.user._id, 'status': "in progress"};
        models.Task
-		.find({'owner':req.session.user._id, "status": "in progress"})
+		.find(filters)
 		.exec(renderTasks); 
     }
     

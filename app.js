@@ -67,6 +67,9 @@ app.get('/welcome', login.welcomePage);
 app.get('/add', task.addTask);
 app.post('/add', task.addTask);
 app.post('/complete', task.completeTask);
+app.get('/task/:id', task.editTask);
+app.post('/task/:id', task.editTask);
+app.post('/delete', task.deleteTask);
 
 app.post('/project/new', project.addProject);
 app.post('/project/:id/delete', project.deleteProject);

@@ -33,16 +33,17 @@
     {{/if}}
 
     {{#each tasks}}
-
     <div class="task" id="task{{id}}" style="border:1px solid #AAA; padding:10px;"> 
 		<h4>{{ title }}</h4>
 		<p>Category: {{ category }}</p>
 		<p>Location: {{ location }}</p>
 		<p>Difficulty: {{ difficulty }}</p>
 		<p>Duration: {{ duration }} hours</p>
+		<a href="/task/{{ id }}"><button>Edit</button></a>
 		<button onclick="complete('{{id}}')">Completed</button>
-	</div>
 
+	</div>
+    
     {{/each}}
 
 

@@ -47,5 +47,52 @@ exports.completeTask = function(req, res) {
 			res.json(data);
 		}
 	);
-	
+}
+
+
+exports.editTask = function(req, res) {
+	if (!req.session.user) {
+       res.redirect("/login");
+    }
+
+    var taskID = req.params.id;
+
+    if (req.body.title) {
+    	models.Task.update({_id: taskID}, {
+			    "title": req.body.title,
+				"location": req.body.location,
+				"difficulty": req.body.diff,
+				"duration": req.body.duration,
+			    "category": req.body.category },
+			    function (err) {
+			    	if (err) {
+		        		console.log(err);
+		        	}
+		        	res.redirect('/');
+			    }
+		    )
+    } else {
+		models.Task.find({_id: taskID}).exec(callback);
+
+	    function callback(err, task) {
+	    	var obj = {task: task[0]};
+	    	if (obj.task.difficulty == "easy") {
+	    		obj["diffe"] = true;
+	    	} else if (obj.task.difficulty == "medium") {
+	    		obj["diffm"] = true;
+	    	} else {
+	    		obj["diffh"] = true;
+	    	}
+			res.render('task', obj);
+	    }
+    } 
+    
+}
+
+exports.deleteTask = function(req, res) {
+	models.Task.remove({_id: req.body.id},
+		function(err, data) {
+			res.json(data);
+		}
+	);
 }
