@@ -1,0 +1,172 @@
+<!doctype html>
+
+<html>
+<head>
+	<title>Instatask</title>	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">-->
+	<link href="/css/introHCI.css" rel="stylesheet">
+	<link href="/css/normalize.css" rel="stylesheet">
+	<link href="css/skeleton.css" rel="stylesheet">
+	<link href="css/signup.css" rel="stylesheet">
+	<!-- this is a comment in HTML -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->  
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/introHCI.js"></script>      
+</head>
+
+<body>
+    
+
+	<div class="container">
+		<h1 class = "center">Instastart</h1>
+
+		<form action="/" method="post" style="border:1px solid #AAA; padding:10px;">
+    	<h4>Default Morning Filter:</h4>
+    	Status: <select name="status"><option value="in progress">in progress</option><option value="completed" {{#if ff.stat2}}selected{{/if}}>completed</option></select></a><br>
+    	Location: <select name="location">
+    			<option value="All">All</option>
+    		{{#each ff.locs}}
+    			<option value="{{loc}}" {{#if sel}}selected{{/if}}>{{loc}}</option>
+    		{{/each}}
+    </select><br>
+    	Category: <select name="category">
+    	    <option value="All">All</option>
+    		{{#each ff.cats}}
+    			<option value="{{cat}}" {{#if sel}}selected{{/if}}>{{cat}}</option>
+    		{{/each}}
+    </select><br>
+    	Difficulty: <input type="checkbox" name="diffe" value="easy" {{#if ff.diffe}}checked{{/if}}> Easy
+  <input type="checkbox" name="diffm" value="medium" {{#if ff.diffm}}checked{{/if}}> Medium
+  <input type="checkbox" name="diffh" value="hard" {{#if ff.diffh}}checked{{/if}}> Hard
+
+  <br>
+  Duration (hrs): 
+  <input type="text" id="duration" name="duration" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  <input type="hidden" name="mindurr" id="mindurr" value="{{ ff.mindurr }}">
+  <input type="hidden" name="maxdurr" id="maxdurr" value="{{ ff.maxdurr }}">
+  <div id="slider-range"></div>
+
+  
+
+  <br>
+    <input type="hidden" name="tofilter" value="true">
+    <input type="submit" value="Filter" />
+
+
+    </form>
+
+
+
+		<form action="/" method="post" style="border:1px solid #AAA; padding:10px;">
+    	<h4>Default Afternoon Filter:</h4>
+    	Status: <select name="status"><option value="in progress">in progress</option><option value="completed" {{#if ff.stat2}}selected{{/if}}>completed</option></select></a><br>
+    	Location: <select name="location">
+    			<option value="All">All</option>
+    		{{#each ff.locs}}
+    			<option value="{{loc}}" {{#if sel}}selected{{/if}}>{{loc}}</option>
+    		{{/each}}
+    </select><br>
+    	Category: <select name="category">
+    	    <option value="All">All</option>
+    		{{#each ff.cats}}
+    			<option value="{{cat}}" {{#if sel}}selected{{/if}}>{{cat}}</option>
+    		{{/each}}
+    </select><br>
+    	Difficulty: <input type="checkbox" name="diffe" value="easy" {{#if ff.diffe}}checked{{/if}}> Easy
+  <input type="checkbox" name="diffm" value="medium" {{#if ff.diffm}}checked{{/if}}> Medium
+  <input type="checkbox" name="diffh" value="hard" {{#if ff.diffh}}checked{{/if}}> Hard
+
+  <br>
+  Duration (hrs): 
+  <input type="text" id="duration" name="duration" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  <input type="hidden" name="mindurr" id="mindurr" value="{{ ff.mindurr }}">
+  <input type="hidden" name="maxdurr" id="maxdurr" value="{{ ff.maxdurr }}">
+  <div id="slider-range"></div>
+
+  
+
+  <br>
+    <input type="hidden" name="tofilter" value="true">
+    <input type="submit" value="Filter" />
+
+
+    </form>
+
+
+		<form action="/" method="post" style="border:1px solid #AAA; padding:10px;">
+    	<h4>Default Night Filter:</h4>
+    	Status: <select name="status"><option value="in progress">in progress</option><option value="completed" {{#if ff.stat2}}selected{{/if}}>completed</option></select></a><br>
+    	Location: <select name="location">
+    			<option value="All">All</option>
+    		{{#each ff.locs}}
+    			<option value="{{loc}}" {{#if sel}}selected{{/if}}>{{loc}}</option>
+    		{{/each}}
+    </select><br>
+    	Category: <select name="category">
+    	    <option value="All">All</option>
+    		{{#each ff.cats}}
+    			<option value="{{cat}}" {{#if sel}}selected{{/if}}>{{cat}}</option>
+    		{{/each}}
+    </select><br>
+    	Difficulty: <input type="checkbox" name="diffe" value="easy" {{#if ff.diffe}}checked{{/if}}> Easy
+  <input type="checkbox" name="diffm" value="medium" {{#if ff.diffm}}checked{{/if}}> Medium
+  <input type="checkbox" name="diffh" value="hard" {{#if ff.diffh}}checked{{/if}}> Hard
+
+  <br>
+  Duration (hrs): 
+  <input type="text" id="duration" name="duration" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  <input type="hidden" name="mindurr" id="mindurr" value="{{ ff.mindurr }}">
+  <input type="hidden" name="maxdurr" id="maxdurr" value="{{ ff.maxdurr }}">
+  <div id="slider-range"></div>
+
+  
+
+  <br>
+    <input type="hidden" name="tofilter" value="true">
+    <input type="submit" value="Filter" />
+
+
+    </form>
+
+
+		<div class ="form row">
+			<h5>Account Settings</h5>		
+			<form action="settings" method="post" >
+				<div class = "twelve columns">
+				<div class = 'twelve columns'>
+			  <input name="name" type="text" placeholder="change name"></input>
+			    </div>
+			  	<div class = 'twelve columns'>
+	          <input name="email" type="text" placeholder="change email"></input>
+	            </div>
+	          <div class = 'twelve columns'>
+	          <input name="pass" type="password" placeholder="change password"></input>
+	            </div>
+	          <div class = 'twelve columns'>
+	          <input name="cpass" type="password" placeholder="confirm new password"></input>
+	            </div>
+	          <div class = 'twelve columns'>
+	          <input name="opass" type="password" placeholder="old password"></input>
+	            </div>
+	          <div class = 'twelve columns'>
+	          	<input type="submit" value="Update Account" class = "button-primary"/>
+	        </div>
+	      </div>
+			</form>
+		</div>
+
+		
+	</div>
+</body>
+</html>
