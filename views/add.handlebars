@@ -5,18 +5,12 @@
 	<title>Instatask</title>	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+	<!--<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">-->
 	<link href="/css/introHCI.css" rel="stylesheet">
-	<!-- this is a comment in HTML -->
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->  
-
+	<link href="/css/addtask.css" rel="stylesheet">
+  	<link href="/css/normalize.css" rel="stylesheet">
+    <link href="css/skeleton.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/introHCI.js"></script>      
@@ -26,25 +20,28 @@
     <div class="container">
 
 		<h1>Instastart</h1>
-
-		<h3>Add a new task</h3>
-
+		<div class = "form">
+		<h4>Add a new task</h4>
 		<form action="add" method="post">
 		  <input name="title" type="text" placeholder="Task"></input><br>
           <input name="category" type="text" placeholder="category"></input><br>
           <input name="location" type="text" placeholder="location"></input><br>
-          <input name="duration" type="number" step="0.01" placeholder="duration"></input> Hours<br>
+          
+          <div class = "twelve columns">
+          <input name="duration" type="number" step="0.01" placeholder="duration (Hours)"></input> <span class = "hrs"></span><br>
+          </div>
 
-          <h3>Difficulty:</h3>
-<input type="radio" name="diff" value="easy"> Easy<br>
-  <input type="radio" name="diff" value="medium" checked> Medium<br>
-  <input type="radio" name="diff" value="hard"> Hard
+          <h4>Difficulty:</h4>
+		  <input type="radio" name="diff" value="easy"> Easy<br>
+		  <input type="radio" name="diff" value="medium" checked> Medium<br>
+		  <input type="radio" name="diff" value="hard"> Hard
 
-			<br><br>
-          <input type="submit" value="Add Task" />
-    </form>
+		  <br><br>
+          <input type="submit" value="Add Task" class="button-primary" />
+    	</form>
 
+    	<a href="/"><button class = "button-primary cancel">Cancel</button></a>
+    	</div>
 	</div>
-
 </body>
 </html>
