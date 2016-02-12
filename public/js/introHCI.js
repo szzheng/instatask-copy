@@ -86,3 +86,32 @@ function deleteTask(id) {
 		window.location = "/";
 	});
 }
+
+
+$(function() {
+   var start = $("#mindurr").val();
+   var end = $("#maxdurr").val();
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 10,
+      values: [ start, end ],
+      slide: function( event, ui ) {
+      	if (ui.values[ 1 ] == 10) {
+      		$( "#duration" ).val( ui.values[ 0 ] + " hrs - " + ui.values[ 1 ] + "+ hrs" );
+      	} else {
+      		$( "#duration" ).val( ui.values[ 0 ] + " hrs - " + ui.values[ 1 ] + " hrs" );
+      	}
+        
+        $("#mindurr").val(ui.values[ 0 ]);
+        $("#maxdurr").val(ui.values[ 1 ]);
+      }
+    });
+    if (end == 10) {
+       $( "#duration" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+      " hrs - " + $( "#slider-range" ).slider( "values", 1 ) + "+ hrs");
+    } else {
+      $( "#duration" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+      " hrs - " + $( "#slider-range" ).slider( "values", 1 ) + " hrs");
+    }
+  });

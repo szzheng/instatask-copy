@@ -19,7 +19,10 @@
 
     <script src="https://code.jquery.com/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/introHCI.js"></script>      
+	<script src="/js/introHCI.js"></script>
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>      
 </head>
 
 <body>
@@ -33,16 +36,30 @@
     <form action="/" method="post" style="border:1px solid #AAA; padding:10px;">
     	<h4>Filter:</h4>
     	Status: <select name="status"><option value="in progress">in progress</option><option value="completed" {{#if ff.stat2}}selected{{/if}}>completed</option></select></a><br>
-    	Location: <br>
-    	Category: <br>
+    	Location: <select name="location">
+    			<option value="All">All</option>
+    		{{#each ff.locs}}
+    			<option value="{{loc}}" {{#if sel}}selected{{/if}}>{{loc}}</option>
+    		{{/each}}
+    </select><br>
+    	Category: <select name="category">
+    	    <option value="All">All</option>
+    		{{#each ff.cats}}
+    			<option value="{{cat}}" {{#if sel}}selected{{/if}}>{{cat}}</option>
+    		{{/each}}
+    </select><br>
     	Difficulty: <input type="checkbox" name="diffe" value="easy" {{#if ff.diffe}}checked{{/if}}> Easy
   <input type="checkbox" name="diffm" value="medium" {{#if ff.diffm}}checked{{/if}}> Medium
   <input type="checkbox" name="diffh" value="hard" {{#if ff.diffh}}checked{{/if}}> Hard
 
   <br>
-  Duration (hrs): <input type="checkbox" name="durr" value="d02" {{#if ff.durre}}checked{{/if}}> 0-2
-  <input type="checkbox" name="durr" value="d25" {{#if ff.durrm}}checked{{/if}}> 2-5
-  <input type="checkbox" name="durr" value="d5" {{#if ff.durrh}}checked{{/if}}> 5+
+  Duration (hrs): 
+  <input type="text" id="duration" name="duration" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  <input type="hidden" name="mindurr" id="mindurr" value="{{ ff.mindurr }}">
+  <input type="hidden" name="maxdurr" id="maxdurr" value="{{ ff.maxdurr }}">
+  <div id="slider-range"></div>
+
+  
 
   <br>
     <input type="hidden" name="tofilter" value="true">
