@@ -77,6 +77,8 @@ app.post('/delete', task.deleteTask);
 
 app.post('/project/new', project.addProject);
 app.post('/project/:id/delete', project.deleteProject);
+
+app.get('/calendar', task.viewCalendar);
 // Example route
 // app.get('/users', user.list);
 

@@ -96,3 +96,7 @@ exports.deleteTask = function(req, res) {
 		}
 	);
 }
+
+exports.viewCalendar = function(req, res) {
+	res.render('calendar');
+}

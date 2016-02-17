@@ -51,3 +51,7 @@ body > div.container {
 .project-img {
      max-height: 300px;
 }
+
+.calendar {
+     overflow:scroll;
+}
