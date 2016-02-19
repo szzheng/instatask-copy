@@ -5,6 +5,73 @@ var std = require("../std");
  * GET home page.
  */
 
+exports.currUserPage = function(req, res) {
+    if (req.session.user) {
+        models.User.find({_id: req.session.user._id}).exec(afterUserFind);
+
+        function afterUserFind(err, users) {
+            var obj = {"success": true, "user": users[0]};
+            models.Location.find({_id: req.session.user.location }).exec(afterFind);
+            function afterFind(err, locs) {
+                if (locs.length > 0) {
+                    obj["location"] = locs[0];
+                }
+                res.json(obj);
+            }
+        }
+        
+        
+    } else {
+        res.json({"error": "No user logged in", "success": false});
+    }
+}
+
+exports.userInfoPage = function(req, res) {
+    if (req.body.id) {
+        models.User.find({_id: req.body.id}).exec(afterFind);
+
+        function afterFind(err, users) {
+            res.json({"user": users[0]});
+        }
+    }
+}
+
+exports.recentPage = function(req, res) {
+    if (req.session.user) {
+        models.Recent.find({owner: req.session.user._id}).exec(afterRecentFind);
+        function afterRecentFind(err, recents) {
+            var obj = {"success": true, "recents": recents};
+            res.json(obj);
+        }
+    } else {
+        res.json({"error": "No user logged in", "success": false});
+    }
+}
+
+exports.friendsPage = function(req, res) {
+    if (req.session.user) {
+        models.Friend.find({person: req.session.user._id}).exec(afterFriendFind);
+        function afterFriendFind(err, friends) {
+            var flist = [];
+            for (var i = 0; i < friends.length; i++) {
+                flist.push(friends[i].friend);
+            }
+            models.User.find({_id: {$in: flist}}).sort("name").exec(afterFind);
+
+            function afterFind(err, found) {
+                if (err) {
+                    console.log(err);
+                }
+                var obj = {"success": true, "friends": found};
+                res.json(obj);
+            }
+            
+        }
+    } else {
+        res.json({"error": "No user logged in", "success": false});
+    }
+}
+
 exports.loginPage = function(req, res){
 	if (req.body.email) {
         models.User.find({email: req.body.email, password: req.body.password}).exec(afterLogin);
@@ -13,7 +80,7 @@ exports.loginPage = function(req, res){
         	console.log(user);
         	if (user.length > 0) { // HOADO: PREVENT MULTIPLE USERS WITH SAME EMAIL
         		req.session.user = user[0];
-        	    res.json({"success": true});
+        	    res.json({"success": true, "user": user[0]});
         	} else {
                 res.json({"error": "Bad email/password combination", "success": false});
         	}
@@ -24,11 +91,16 @@ exports.loginPage = function(req, res){
 	
 };
 
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
 exports.signupPage = function(req, res) {
     if (req.body.name) {
         var newUser = new models.User(
             {
-                "name": req.body.name,
+                "name": toTitleCase(req.body.name),
                 "email": req.body.email,
                 "password": req.body.password,
                 "imageUrl": "http://qualiadesigns.com/wp-content/uploads/qdi-generic-testimonial-person.png",
@@ -49,13 +121,20 @@ exports.signupPage = function(req, res) {
             if (user.length > 0) { // HOADO: PREVENT MULTIPLE USERS WITH SAME EMAIL
                 res.json({'error': "This email has already been registered", "success": false});
             } else {
-                req.session.user = newUser;
                 newUser.save(afterSaving);
-                
-                function afterSaving(err) {
+
+                function afterSaving(err, nuser) {
                     if (err) {
                         console.log(err);
                     }
+                    req.session.user = nuser;
+                    var newRecent = new models.Recent({
+                        "owner": nuser._id,
+                        "message": "<b>Welcome to FRIENDSnFOOD!</b><br> Be sure to input the times you are free to grab food so that you can stay in touch with your friends despite your busy life!",
+                        "link": "",
+                        "time": Date.now()
+                    });
+                    newRecent.save();
                     res.json({'success': true});
                 }
             }
@@ -98,7 +177,6 @@ exports.step1Page = function(req, res) {
 
 exports.step2Page = function(req, res) {
     if (req.body.d1) {
-        console.log(res.body);
         if (req.session.location) {
             models.Location.remove({_id: req.session.location._id},
                 function(err, data) {
@@ -108,18 +186,28 @@ exports.step2Page = function(req, res) {
                 }
             );
         }
-        var newLoc = new models.Location(res.body);
+        
+        var obj = {};
+        for (var i = 1; i < 12; i++) {
+            obj["d" + i] = req.body["d" + i] == 'true';
+        }
+        for (var i = 1; i < 16; i++) {
+            obj["n" + i] = req.body["n" + i] == 'true';
+        }
+        var newLoc = new models.Location(obj);
         newLoc.save(afterLocSaving);
-        function afterLocSaving(err) {
+        function afterLocSaving(err, nobj) {
             if (err) {
                 console.log(err);
             }
             models.User.update({_id: req.session.user._id}, {
-                "location": newLoc._id
-            }, function(err) {
+                "location": nobj._id
+            }, function(err, updated) {
+
                 if (err) {
                     console.log(err);
                 }
+                req.session.user.location = nobj._id;
                 res.json({'success': true});
             });
             

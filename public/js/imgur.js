@@ -55,6 +55,7 @@
             xhttp.open('POST', path, true);
             xhttp.setRequestHeader('Authorization', 'Client-ID ' + this.clientid);
 			$("#uploadingmsg").show();
+			$("#uploadingmsg2").show();
             xhttp.onreadystatechange = function () {
                 if (this.readyState === 4) {
                     if (this.status >= 200 && this.status < 300) {

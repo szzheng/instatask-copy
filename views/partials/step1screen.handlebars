@@ -6,7 +6,7 @@
 <span class="hidden" style="margin-left:5px;">Back</span>
 </div>
 <div class="cell center" style="width:80%">
-<span style="color:#CCFFCC;">Step 1:</span> Profile Settings
+<span class="whiteGreen" style="color:#CCFFCC;">Step 1:</span> Profile Settings
 </div>
 <div class="cell" style="width:10%">
 &nbsp;
@@ -105,24 +105,44 @@
 
 </div>
 
-<div class="underBar">
-<div class="row">
-<div class="cell clickable" style="width:10%">
-<span style="margin-left:5px;"><button class="fnf-second-button" onclick="skip(2)">skip</button></span>
-</div>
-<div class="cell center" style="width:80%">
+<div class="underBar underSteps">
+	<div class="row">
+		<div class="cell clickable" style="width:10%">
+		<span style="margin-left:5px;"><button class="fnf-second-button" onclick="skip(2)">skip</button></span>
+		</div>
+		<div class="cell center" style="width:80%">
 
-<div class="filledBullet bullet"></div>
-<div class=" bullet"></div>
-<div class=" bullet"></div>
-<div class=" bullet"></div>
+		<div class="filledBullet bullet"></div>
+		<div class=" bullet"></div>
+		<div class=" bullet"></div>
+		<div class=" bullet"></div>
 
+		</div>
+		<div class="cell" style="width:10%">
+		<button class="fnf-button" style="margin-right:4px;" onclick="sendStep1()">continue</button>
+		</div>
+	</div>
 </div>
-<div class="cell" style="width:10%">
-<button class="fnf-button" style="margin-right:4px;" onclick="sendStep1()">continue</button>
+
+
+
+
+<div class="underBar underSettings hidden">
+	<div class="row">
+		<div class="cell clickable" style="width:10%">
+		<span style="margin-left:5px;"><button class="fnf-second-button" onclick="mains();swap(4);">cancel</button></span>
+		</div>
+		<div class="cell center" style="width:80%">
+
+
+
+		</div>
+		<div class="cell" style="width:10%">
+			<button class="fnf-button" style="margin-right:4px;" onclick="sendStep1(true)">save</button>
+		</div>
+	</div>
 </div>
-</div>
-</div>
+
 
 </div>
 </div>

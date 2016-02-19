@@ -1,13 +1,33 @@
 'use strict';
 
+var userInit = false;
+
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function() {
 	initializePage();
 
 	$("#mainArea").height( $(window).height() - 120 );
+	$("#mainModal").height( $(window).height() - 20 );
+	$("#mainModal").width( $(window).width() - 20 );
+	$("#mainShadow").height( $(window).height());
+	$("#mainShadow").width( $(window).width() );
 
 	$( window ).resize(function() {
 	  $("#mainArea").height( $(window).height() - 120 );
+	  $("#mainModal").height( $(window).height() - 20 );
+	  $("#mainModal").width( $(window).width() - 20 );
+	  $("#mainShadow").height( $(window).height());
+	  $("#mainShadow").width( $(window).width() );
+	});
+
+	$(".mcal td").click(function(e) {
+		var t = $(e.target);
+		if (!$(e.target).hasClass("freeCell")) {
+			$(e.target).text("searching...");
+		} else {
+			$(e.target).text("");
+		}
+		$(e.target).toggleClass("freeCell");
 	});
 })
 
@@ -93,7 +113,21 @@ function deleteTask(id) {
 	});
 }
 
-function sendStep1() {
+function profileSettings() {
+	$(".whiteGreen").hide();
+	$(".underSteps").hide();
+	$(".underSettings").show();
+	skip(1);
+}
+
+function diningLocations() {
+	$(".whiteGreen").hide();
+	$(".underSteps").hide();
+	$(".underSettings2").show();
+	skip(2);
+}
+
+function sendStep1(after) {
 	if ($("#step1_req").is(":checked") && !$("#step1_f").is(":checked")) {
 		alert("Friends needs to be checked if you require at least one friend at each meetup.");
 	} else if (!$("#step1_f").is(":checked") && !$("#step1_fof").is(":checked")
@@ -104,7 +138,13 @@ function sendStep1() {
 				"fof": $("#step1_fof").is(":checked"), "any": $("#step1_any").is(":checked"),
 				"req": $("#step1_req").is(":checked")}, function (data) {
 			if (data.success) {
-				skip(2);
+				if (after) {
+					mains();
+					page(4);
+				} else {
+					skip(2);
+				}
+				
 			} else {
 				alert(data.error);
 			}
@@ -112,18 +152,23 @@ function sendStep1() {
 	}
 }
 
-function sendStep2() {
+function sendStep2(after) {
 	var obj = {};
 	for (var i = 1; i < 12; i++) {
 		obj["d" + i] = $("#step2_d" + i).is(":checked");
 	}
-	for (var i = 1; i < 15; i++) {
+	for (var i = 1; i < 16; i++) {
 		obj["n" + i] = $("#step2_n" + i).is(":checked");
 	}
 
 	$.post('/step2', obj, function (data) {
 		if (data.success) {
-			skip(3);
+			if (after) {
+				mains();
+				swap(4);
+			} else {
+				skip(3);
+			}
 		} else {
 			alert(data.error);
 		}
@@ -150,6 +195,7 @@ function search(id) {
 						var clone = $("#addTemplate").clone().removeClass("hidden");
 						clone.attr("id", "consider" + data.found[i]._id);
 						clone.find(".addName").text(data.found[i].name);
+						clone.find(".addName").attr("onclick", "showFriend('" + data.found[i]._id + "')");
 						clone.find(".addImg").attr("src", data.found[i].imageUrl);
 						clone.find(".addButton").attr("onclick", "addf('" + data.found[i]._id + "')");
 						$("#" + id + "append").append(clone);
@@ -174,6 +220,7 @@ function addf(id) {
 			$("#consider" + id).remove();
 			$("#recentadded").prepend(clone);
 			$("#recentaddedlabel").hide();
+			populateFriends();
 		} else {
 			alert(data.error);
 		}
@@ -203,6 +250,36 @@ function confirmsignup() {
 	}
 }
 
+function initUser(user, location) {
+	userInit = true;
+	populateRecents();
+	$("#preview").attr("src",user.imageUrl);
+	if (user.okayFriends != $("#step1_f").is(":checked")) {
+		$("#step1_f").click();
+	}
+	if (user.okayFOF != $("#step1_fof").is(":checked")) {
+		$("#step1_fof").click();
+	}
+	if (user.okayAny != $("#step1_any").is(":checked")) {
+		$("#step1_any").click();
+	}
+	if (user.needFriend != $("#step1_req").is(":checked")) {
+		$("#step1_req").click();
+	}
+
+
+	for (var i = 1; i < 12; i++) {
+		if (location["d" + i] != $("#step2_d" + i).is(":checked")) {
+			$("#step2_d" + i).click();
+		}
+	}
+	for (var i = 1; i < 16; i++) {
+		if (location["n" + i] != $("#step2_n" + i).is(":checked")) {
+			$("#step2_n" + i).click();
+		}
+	}
+}
+
 function login() {
 	if (validateEmail($("#email").val())) {
 		if ($("#password").val() == "") {
@@ -210,7 +287,7 @@ function login() {
 		} else {
 			$.post('/login', {'email': $("#email").val(), "password": $("#password").val()}, function (data) {
 				if (data.success) {
-					console.log(data);
+					mains();
 				} else {
 					alert(data.error);
 				}
@@ -224,9 +301,19 @@ function login() {
 function skip(num) {
 	$(".screen").hide();
 	$("#step" + num + "Screen").show();
+	userInit = true;
 }
 
 function mains() {
+	if (!userInit) {
+		$.get("/curruser", function(data) {
+			if (data.success) {
+				initUser(data.user, data.location);
+			} else {
+				alert(data.error);
+			}
+		});
+	}
 	$(".screen").hide();
 	$("#mainScreen").show();
 }
@@ -235,9 +322,69 @@ var ntitles = ["Recent", "Calendar", "Friends", "Settings"];
 function swap(page) {
 	for (var i = 1; i < 5; i++) {
 		$(".nav" + i).removeClass("active");
+		$("#view" + i).hide();
 	}
 	$(".nav" + page).addClass("active");
+	$("#view" + page).show();
 	$("#mTitle").text(ntitles[page - 1]);
+	initPage(page);
+}
+
+function populateRecents() {
+	$.get("/recent", function(data) {
+		if (data.success) {
+			$("#recentFeed").html("");
+			for (var i = 0; i < data.recents.length; i++) {
+				var d = new Date(data.recents[i].time)
+				var ender = "<div class='recentCardBottom'>" + d.toLocaleTimeString() + " " + d.toLocaleDateString() + "</div>";
+				if (data.recents[i].link != "") {
+					$("#recentFeed").append("<a href='" + data.recents[i].link + "'><div class='recentCard clickable shadable2'>" + data.recents[i].message + "</div>" + ender + "</a>");
+				} else {
+					$("#recentFeed").append("<div class='recentCard'>" + data.recents[i].message + "</div>" + ender);
+				}
+			}
+		} else {
+			alert(data.error);
+		}
+	});
+}
+
+function populateFriends() {
+	$.get("/friends", function(data) {
+		if (data.success) {
+			$("#myfriendslist").html("");
+			if (data.friends.length > 0) {
+				$("#myfriendslabel").hide();
+			}
+			for (var i = 0; i < data.friends.length; i++) {
+				var clone = $("#addTemplate").clone().removeClass("hidden");
+				clone.attr("id", "myfriend" + data.friends[i]._id);
+				clone.find(".addName").text(data.friends[i].name);
+				clone.find(".addName").text(data.friends[i].name);
+				clone.find(".addName").attr("onclick", "showFriend('" + data.friends[i]._id + "')")
+				clone.find(".addImg").attr("src", data.friends[i].imageUrl);
+				clone.find(".addButton").attr("onclick", "addf('" + data.friends[i]._id + "')");
+				clone.find(".addButton").attr("disabled", "true");
+				clone.find(".addButton").text("friends");
+				$("#myfriendslist").append(clone);
+			}
+		} else {
+			alert(data.error);
+		}
+	});
+}
+
+function initPage(page) {
+	if (page == 1) {
+		populateRecents();
+		
+	} else if (page == 2) {
+
+	} else if (page == 3) {
+		populateFriends();
+	} else if (page == 4) {
+
+	}
 }
 
 function backtologin() {
@@ -256,6 +403,23 @@ function signup() {
 	$("#button1").attr("onclick", "confirmsignup()");
 }
 
+
+function hideModal() {
+	$("#mainModal, #mainShadow").hide();
+}
+
+function showModal() {
+	$("#mainModal, #mainShadow").show();
+}
+
+function showFriend(id) {
+	showModal();
+	$.post("/user", {"id": id}, function(data) {
+		console.log(data);
+		$("#modalTitle").text(data.user.name);
+		$("#modalImage").attr("src", data.user.imageUrl);
+	});
+}
 
 $(function() {
    var start = $("#mindurr").val();

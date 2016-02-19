@@ -74,7 +74,10 @@ app.get('/step3', login.step3Page);
 app.post('/step3', login.step3Page);
 app.get('/step4', login.step4Page);
 app.post('/step4', login.step4Page);
-
+app.get('/curruser', login.currUserPage);
+app.get('/recent', login.recentPage);
+app.get('/friends', login.friendsPage);
+app.post('/user', login.userInfoPage);
 
 app.get('/add', task.addTask);
 app.post('/add', task.addTask);
