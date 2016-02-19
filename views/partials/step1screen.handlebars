@@ -1,0 +1,128 @@
+<div id="step1Screen" class="screen hidden">
+
+<div class="pageBar table">
+<div class="row">
+<div class="cell clickable" style="width:10%">
+<span class="hidden" style="margin-left:5px;">Back</span>
+</div>
+<div class="cell center" style="width:80%">
+<span style="color:#CCFFCC;">Step 1:</span> Profile Settings
+</div>
+<div class="cell" style="width:10%">
+&nbsp;
+</div>
+</div>
+</div>
+
+<div class="fnf-back1">
+
+<h3 class="offset5">Upload a profile picture</h3>
+
+<div class="table full">
+			<div class="row">
+				<div class="cell center">
+<img id="preview" class="img-responsive" style="max-width:404px;max-height:310px" src="http://qualiadesigns.com/wp-content/uploads/qdi-generic-testimonial-person.png"></img>
+
+<div id="uploadingmsg" class="center hidden" style="color:#F18D05;">Uploading ... please wait</div>
+
+<div class="dropzone offset5 center" style="padding-top:5px;background-color:#EEE;width:400px;border:2px dashed #AAA;margin-bottom:20px;"></div>
+				</div>
+			</div>
+</div>
+
+
+<h3 class="offset5">Who are you down to get food with?</h3>
+<div class="offset5">
+
+<div class="table">
+	<div class="row">
+		<div class="cell">
+			<div class="onoffswitch">
+			    <input type="checkbox" name="step1_f" class="onoffswitch-checkbox fixed hidden" id="step1_f"  style="opacity:0;" checked>
+			    <label class="onoffswitch-label" for="step1_f"></label>
+			</div>
+		</div>
+		<div class="cell toggleCell">
+			Friends
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="cell">
+			<div class="onoffswitch">
+			    <input type="checkbox" name="step1_fof" class="onoffswitch-checkbox fixed hidden" id="step1_fof" style="opacity:0;" checked>
+			    <label class="onoffswitch-label" for="step1_fof"></label>
+			</div>
+		</div>
+		<div class="cell toggleCell">
+			Friends of friends
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="cell">
+			<div class="onoffswitch">
+			    <input type="checkbox" name="step1_any" class="onoffswitch-checkbox fixed hidden" style="opacity:0;" id="step1_any">
+			    <label class="onoffswitch-label" for="step1_any"></label>
+			</div>
+		</div>
+		<div class="cell toggleCell">
+			Any UCSD student
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="cell">
+			<div class="onoffswitch">
+			    <input type="checkbox" name="step1_req" class="onoffswitch-checkbox fixed hidden" id="step1_req" style="opacity:0;" checked>
+			    <label class="onoffswitch-label" for="step1_req"></label>
+			</div>
+		</div>
+		<div class="cell toggleCell">
+			Require at least one friend at each meetup
+		</div>
+	</div>
+</div>
+
+<div class="top20">&nbsp;</div>
+
+
+<script type="text/javascript">
+    var feedback = function (res) {
+        if (res.success === true) {
+        	$("#uploadingmsg").hide();
+            $("#preview").attr("src", res.data.link);
+        }
+    };
+
+
+    new Imgur({
+        clientid: 'cc86a8de0e7c459',
+        callback: feedback
+    });
+
+</script>
+
+</div>
+
+<div class="underBar">
+<div class="row">
+<div class="cell clickable" style="width:10%">
+<span style="margin-left:5px;"><button class="fnf-second-button" onclick="skip(2)">skip</button></span>
+</div>
+<div class="cell center" style="width:80%">
+
+<div class="filledBullet bullet"></div>
+<div class=" bullet"></div>
+<div class=" bullet"></div>
+<div class=" bullet"></div>
+
+</div>
+<div class="cell" style="width:10%">
+<button class="fnf-button" style="margin-right:4px;" onclick="sendStep1()">continue</button>
+</div>
+</div>
+</div>
+
+</div>
+</div>

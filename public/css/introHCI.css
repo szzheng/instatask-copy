@@ -3,6 +3,150 @@ body {
   font-size:small;
 }
 
+input[type="text"].searchBar {
+  border-radius:0px;
+  border-right:0px;
+  width:100%;
+  margin-left:1px;
+}
+
+.navBar {
+  height:60px;
+  background-color:white;
+  -webkit-box-shadow: 0 0 7px #D0D0D0;
+  box-shadow: 0 0 7px #D0D0D0;
+}
+
+#mainArea {
+  overflow:scroll;
+}
+
+.navIcon {
+  height:32px;
+  width:32px;
+  margin-top:5px;
+}
+
+.navBar .cell {
+  width:25%;
+  border-right:1px solid #EEE;
+  text-align: center;
+  font-size:x-small;
+}
+
+.navBar .cell.active {
+  background-color:#F4F4F4;
+  font-weight:bold;
+}
+
+.addBox {
+ 
+}
+
+.addRow {
+  border-bottom:1px solid #CCC;
+}
+
+.addRow:hover {
+  background-color:#F0F0F0;
+}
+
+.addBox button, .addBox button:focus {
+  margin-top:3px;
+  margin-bottom:3px;
+  margin-right:10px;
+  margin-left:10px;
+  color:#F18D05;
+}
+
+.addBox button:hover {
+  border-color:#F18D05;
+  color:#F18D05;
+}
+
+.addBox button:disabled {
+  background-color:#F18D05;
+  border-color:#F18D05;
+  color:white;
+}
+
+.addBox button:active {
+  border-color:#E17D00;
+  color:#E17D00;
+}
+
+.addBox img {
+  margin-top:3px;
+  position: absolute;
+  height:40px;
+  width:40px;
+  margin-left:10px;
+  border-radius:20px;
+}
+
+.friendBox {
+  border-top:1px solid #CCC;
+  border-bottom:1px solid #CCC;
+  margin-bottom:10px;
+}
+
+.friendBoxTop {
+  background-color:#F0F0F0;
+  border-bottom:1px solid #CCC;
+}
+
+.friendBoxLabel {
+  padding-top:30px;
+  padding-bottom:30px;
+  text-align: center;
+  color:#AAA;
+}
+
+
+.pageBar {
+  padding-top:5px;
+  padding-bottom:5px;
+  font-weight:900;
+  border-bottom:4px solid #579C20; 
+  background-color:#61AE24;
+  color:white; 
+  width:100%;
+}
+
+.pageBar.red {
+  background-color:#E54028;
+  border-bottom:4px solid #CD3923;
+}
+
+.underBar {
+  padding-top:5px;
+  padding-bottom:5px;
+  font-weight:900;
+  border-top:4px solid #E9E9E9; 
+  background-color:#F0F0F0;
+  width:100%;
+}
+
+.bullet {
+  height:6px;
+  width:6px;
+  border:1px solid #00A1CB;
+  border-radius:4px;
+  display:inline-block;
+}
+
+.filledBullet {
+  background-color:#00A1CB;
+}
+
+.toggleCell {
+  position: absolute;
+    margin-top: 7px;
+    margin-left: 10px;
+    font-size: large;
+}
+
+
 .logo {
   margin-top:50px;
   width:90%;
@@ -498,3 +642,46 @@ body > div.container {
   font-size:0%;
 }
 
+
+.onoffswitch {
+    position: relative; width: 60px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    height: 36px; padding: 0; line-height: 36px;
+    border: 2px solid #CCCCCC; border-radius: 36px;
+    background-color: #FFFFFF;
+    transition: background-color 0.3s ease-in;
+}
+.onoffswitch-label:before {
+    content: "";
+    display: block; width: 36px; margin: 0px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 22px;
+    border: 2px solid #CCCCCC; border-radius: 36px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label {
+    background-color: #61AE24;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+   border-color: #61AE24;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    right: 0px; 
+}
+
+.calx, .calx td, .calx tr, .calx th {
+  padding:0px;
+  margin:0px;
+  width:50px;
+}
+
+.tableFirstCol {
+  width:50px;
+}

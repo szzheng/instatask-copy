@@ -1,0 +1,86 @@
+<div id="step2Screen" class="screen hidden">
+
+<div class="pageBar table">
+<div class="row">
+<div class="cell clickable" style="width:10%">
+<span style="margin-left:5px;" onclick="skip(1)">Back</span>
+</div>
+<div class="cell center" style="width:80%">
+<span style="color:#CCFFCC;">Step 2:</span> Where are you okay eating at?
+</div>
+<div class="cell" style="width:10%">
+&nbsp;
+</div>
+</div>
+</div>
+
+<div class="fnf-back1">
+
+<h3 class="offset5">Dining Halls</h3>
+<div class="offset5">
+
+<div class="table">
+    {{#each dining}}
+	<div class="row">
+
+		<div class="cell">
+			<div class="onoffswitch">
+			    <input type="checkbox" name="step2_d{{id}}" class="onoffswitch-checkbox fixed hidden" id="step2_d{{id}}"  style="opacity:0;" checked>
+			    <label class="onoffswitch-label" for="step2_d{{id}}"></label>
+			</div>
+		</div>
+		<div class="cell toggleCell">
+			{{name}}
+		</div>
+	</div>
+    {{/each}}
+</div>
+</div>
+
+<h3 class="offset5">Non-dining Halls</h3>
+<div class="offset5">
+
+<div class="table">
+    {{#each nondining}}
+	<div class="row">
+
+		<div class="cell">
+			<div class="onoffswitch">
+			    <input type="checkbox" name="step2_n{{id}}" class="onoffswitch-checkbox fixed hidden" id="step2_n{{id}}"  style="opacity:0;" checked>
+			    <label class="onoffswitch-label" for="step2_n{{id}}"></label>
+			</div>
+		</div>
+		<div class="cell toggleCell">
+			{{name}}
+		</div>
+	</div>
+    {{/each}}
+</div>
+</div>
+
+<div class="top20">&nbsp;</div>
+
+
+</div>
+
+<div class="underBar">
+<div class="row">
+<div class="cell clickable" style="width:10%">
+<span style="margin-left:5px;"><button class="fnf-second-button" onclick="skip(3)">skip</button></span>
+</div>
+<div class="cell center" style="width:80%">
+
+<div class="bullet"></div>
+<div class="filledBullet bullet"></div>
+<div class=" bullet"></div>
+<div class=" bullet"></div>
+
+</div>
+<div class="cell" style="width:10%">
+<button class="fnf-button" style="margin-right:4px;" onclick="sendStep2()">continue</button>
+</div>
+</div>
+</div>
+
+</div>
+</div>

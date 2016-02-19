@@ -3,6 +3,12 @@
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function() {
 	initializePage();
+
+	$("#mainArea").height( $(window).height() - 120 );
+
+	$( window ).resize(function() {
+	  $("#mainArea").height( $(window).height() - 120 );
+	});
 })
 
 /*
@@ -87,6 +93,93 @@ function deleteTask(id) {
 	});
 }
 
+function sendStep1() {
+	if ($("#step1_req").is(":checked") && !$("#step1_f").is(":checked")) {
+		alert("Friends needs to be checked if you require at least one friend at each meetup.");
+	} else if (!$("#step1_f").is(":checked") && !$("#step1_fof").is(":checked")
+			&& !$("#step1_any").is(":checked") ) {
+		alert("You must select at least one group of people that you would like to eat with.");
+	} else {
+		$.post('/step1', {"url": $("#preview").attr("src"), "f": $("#step1_f").is(":checked"), 
+				"fof": $("#step1_fof").is(":checked"), "any": $("#step1_any").is(":checked"),
+				"req": $("#step1_req").is(":checked")}, function (data) {
+			if (data.success) {
+				skip(2);
+			} else {
+				alert(data.error);
+			}
+		});
+	}
+}
+
+function sendStep2() {
+	var obj = {};
+	for (var i = 1; i < 12; i++) {
+		obj["d" + i] = $("#step2_d" + i).is(":checked");
+	}
+	for (var i = 1; i < 15; i++) {
+		obj["n" + i] = $("#step2_n" + i).is(":checked");
+	}
+
+	$.post('/step2', obj, function (data) {
+		if (data.success) {
+			skip(3);
+		} else {
+			alert(data.error);
+		}
+	});
+}
+
+function search(id) {
+	var toSearch = $("#" + id).val();
+	if (toSearch == "") {
+		$("#" + id + "label").show();
+		$("#" + id + "label").text("Please type something in the search box.");
+		$("#" + id + "append").html("");
+	} else {
+		$.post('/step3', {'action': 'search', "query": toSearch}, function (data) {
+			if (data.success) {
+				if (data.found.length == 0) {
+					$("#" + id + "label").show();
+					$("#" + id + "label").text("No results found.");
+					$("#" + id + "append").html("");
+				} else {
+					$("#" + id + "append").html("");
+					$("#" + id + "label").hide();
+					for (var i = 0; i < data.found.length; i++) {
+						var clone = $("#addTemplate").clone().removeClass("hidden");
+						clone.attr("id", "consider" + data.found[i]._id);
+						clone.find(".addName").text(data.found[i].name);
+						clone.find(".addImg").attr("src", data.found[i].imageUrl);
+						clone.find(".addButton").attr("onclick", "addf('" + data.found[i]._id + "')");
+						$("#" + id + "append").append(clone);
+					}
+				}
+				console.log(data.found);
+			} else {
+				alert(data.error);
+			}
+		});
+	}
+	
+}
+
+function addf(id) {
+	$.post('/step3', {'action': 'add', "id": id}, function (data) {
+		if (data.success) {
+			var clone = $("#consider" + id).clone();
+			clone.attr("id", "friend" + id);
+			clone.find(".addButton").attr("disabled", "true");
+			clone.find(".addButton").text("friends");
+			$("#consider" + id).remove();
+			$("#recentadded").prepend(clone);
+			$("#recentaddedlabel").hide();
+		} else {
+			alert(data.error);
+		}
+	});
+}
+
 function confirmsignup() {
 	if (validateEmail($("#email").val())) {
 		if ($("#password").val() == "") {
@@ -99,7 +192,7 @@ function confirmsignup() {
 
 			$.post('/signup', {'email': $("#email").val(), "password": $("#password").val(), "name": $("#name").val()}, function (data) {
 				if (data.success) {
-					console.log(data);
+					skip(1);
 				} else {
 					alert(data.error);
 				}
@@ -126,6 +219,25 @@ function login() {
 	} else {
 		alert("Please enter a valid email");
 	}
+}
+
+function skip(num) {
+	$(".screen").hide();
+	$("#step" + num + "Screen").show();
+}
+
+function mains() {
+	$(".screen").hide();
+	$("#mainScreen").show();
+}
+
+var ntitles = ["Recent", "Calendar", "Friends", "Settings"];
+function swap(page) {
+	for (var i = 1; i < 5; i++) {
+		$(".nav" + i).removeClass("active");
+	}
+	$(".nav" + page).addClass("active");
+	$("#mTitle").text(ntitles[page - 1]);
 }
 
 function backtologin() {

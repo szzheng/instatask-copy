@@ -7,7 +7,13 @@ var std = require("../std");
  */
 
 exports.view = function(req, res){
-  res.render('index');
+  var obj = {};
+  obj["dining"] = diningNames;
+  obj["nondining"] = nondiningNames;
+  if (req.session.user) {
+    obj["loggedin"] = true;
+  }
+  res.render('index', obj);
   /*
     if (!req.session.user) {
       res.redirect("/login");
@@ -16,6 +22,8 @@ exports.view = function(req, res){
     }
   */
 };
+
+
 
 
 
