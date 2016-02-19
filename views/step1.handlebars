@@ -7,10 +7,22 @@
 </head>
 
 <body>
+
+
     Step 1: Profile Settings
     
 
+<form method="post" action="step1">
+    <h5>Who are you down to get food with?</h5>
+    <input type="checkbox" name="f" value="on" {{#if f}}checked{{/if}}>Friends<br>
+    <input type="checkbox" name="fof" value="on" {{#if fof}}checked{{/if}}>Friends of friends<br>
+    <input type="checkbox" name="any" value="on" {{#if any}}checked{{/if}}>Any UCSD student<br>
+
+    <input type="checkbox" name="req" value="on" {{#if req}}checked{{/if}}>Require at least on friend in each meetup<br>
+
     <br>
-    <a href="step2">skip</a><input type="submit" value="Continue"></input>
+    <a href="step2">skip</a><input name="formsent" type="submit" value="Continue"></input>
+</form>
+
 </body>
 </html>

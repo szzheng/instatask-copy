@@ -83,7 +83,6 @@ var LocationSchema = new Mongoose.Schema({
 	"d9": Boolean,
 	"d10": Boolean,
 	"d11": Boolean,
-	"d12": Boolean,
 
 	"n1": Boolean,
 	"n2": Boolean,

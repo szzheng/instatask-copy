@@ -1,6 +1,6 @@
-
+ 
 var models = require('../models');
-
+var std = require("../std");
 /*
  * GET home page.
  */
@@ -13,24 +13,24 @@ exports.loginPage = function(req, res){
         	console.log(user);
         	if (user.length > 0) { // HOADO: PREVENT MULTIPLE USERS WITH SAME EMAIL
         		req.session.user = user[0];
-        	    res.redirect('/');
+        	    res.json({"success": true});
         	} else {
-                res.render('login', {"error": "Bad email/password combination"});
+                res.json({"error": "Bad email/password combination", "success": false});
         	}
         }
 	} else {
-		res.render('login');
+        res.json({"error": "No information entered", "success": false});
 	}
 	
 };
 
 exports.signupPage = function(req, res) {
     if (req.body.name) {
-		var newUser = new models.User(
-		    {
-			    "name": req.body.name,
-				"email": req.body.email,
-				"password": req.body.pass,
+        var newUser = new models.User(
+            {
+                "name": req.body.name,
+                "email": req.body.email,
+                "password": req.body.password,
                 "imageUrl": "",
                 "attendence": 0,
                 "aamount": 0,
@@ -41,20 +41,29 @@ exports.signupPage = function(req, res) {
                 "okayFOF": true,
                 "okayAny": false,
                 "needFriend": true
-		    }
-		);
-		req.session.user = newUser;
-		newUser.save(afterSaving);
-		
-        function afterSaving(err) {
-        	if (err) {
-        		console.log(err);
-        	}
-        	res.redirect('step1');
+            }
+        );
+        models.User.find({email: req.body.email}).exec(afterCheck);
+
+        function afterCheck(err, user) {
+            if (user.length > 0) { // HOADO: PREVENT MULTIPLE USERS WITH SAME EMAIL
+                res.json({'error': "This email has already been registered", "success": false});
+            } else {
+                req.session.user = newUser;
+                newUser.save(afterSaving);
+                
+                function afterSaving(err) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    res.json({'success': true});
+                }
+            }
+    		
         }
         
     } else {
-    	res.render('signup');
+    	res.json({'error': "Please fill out all the fields", "success": false});
     }
 }
 
@@ -65,11 +74,26 @@ exports.logoutPage = function(req, res) {
 
 // Steps pipeline
 exports.step1Page = function(req, res) {
-    res.render('step1');
+    if (req.body.formsent) {
+        res.redirect('step2');
+    } else {
+        var obj = {};
+        obj["dining"] = diningNames;
+        obj["nondining"] = nondiningNames;
+        res.render('step1', obj);
+    }
 }
 
 exports.step2Page = function(req, res) {
-    res.render('step2');
+    if (req.body.formsent) {
+        res.redirect('step3');
+    } else {
+        var obj = {};
+        obj["dining"] = diningNames;
+        obj["nondining"] = nondiningNames;
+        res.render('step2', obj);
+    }
+    
 }
 
 exports.step3Page = function(req, res) {

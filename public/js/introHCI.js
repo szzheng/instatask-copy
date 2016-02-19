@@ -87,6 +87,63 @@ function deleteTask(id) {
 	});
 }
 
+function confirmsignup() {
+	if (validateEmail($("#email").val())) {
+		if ($("#password").val() == "") {
+			alert("You forgot to enter a password");
+		} else if ($("#password").val() != $("#cpassword").val()) {
+			alert("Your passwords do not match");
+		} else if ($("#name").val() == "") {
+			alert("You forgot to enter your name");
+		} else {
+
+			$.post('/signup', {'email': $("#email").val(), "password": $("#password").val(), "name": $("#name").val()}, function (data) {
+				if (data.success) {
+					console.log(data);
+				} else {
+					alert(data.error);
+				}
+			});
+		}
+	} else {
+		alert("Please enter a valid email");
+	}
+}
+
+function login() {
+	if (validateEmail($("#email").val())) {
+		if ($("#password").val() == "") {
+			alert("You forgot to enter a password");
+		} else {
+			$.post('/login', {'email': $("#email").val(), "password": $("#password").val()}, function (data) {
+				if (data.success) {
+					console.log(data);
+				} else {
+					alert(data.error);
+				}
+			});
+		}
+	} else {
+		alert("Please enter a valid email");
+	}
+}
+
+function backtologin() {
+	$(".signupfield").hide();
+	$("#button2").text("sign up");
+	$("#button2").attr("onclick", "signup()");
+	$("#button1").text("log in");
+	$("#button1").attr("onclick", "login()");
+};
+
+function signup() {
+	$(".signupfield").show();
+	$("#button2").text("back");
+	$("#button2").attr("onclick", "backtologin()");
+	$("#button1").text("sign up");
+	$("#button1").attr("onclick", "confirmsignup()");
+}
+
 
 $(function() {
    var start = $("#mindurr").val();
@@ -115,3 +172,13 @@ $(function() {
       " hrs - " + $( "#slider-range" ).slider( "values", 1 ) + " hrs");
     }
   });
+
+
+
+
+
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}

@@ -7,9 +7,23 @@
 </head>
 
 <body>
-    Step 2: Where do you like to eat?
+	<a href="step1">back</a><br>
+    Step 2: Where are you okay eating at?
     
+<form method="post" action="step2">
+<h5>Dining Halls</h5>
+{{#each dining}}
+<input type="checkbox" name="d{{id}}" value="on" checked>{{name}}<br>
+{{/each}}
+
+<h5>Non-dining Halls</h5>
+{{#each nondining}}
+<input type="checkbox" name="n{{id}}" value="on" checked>{{name}}<br>
+{{/each}}
+
+
     <br>
-    <a href="step3">skip</a><input type="submit" value="Continue"></input>
+    <a href="step3">skip</a><input name="formsent" type="submit" value="Continue"></input>
+</form>
 </body>
 </html>

@@ -1,3 +1,118 @@
+body {
+  background-color:#F1EFEA;
+  font-size:small;
+}
+
+.logo {
+  margin-top:50px;
+  width:90%;
+}
+
+.top20 {
+  margin-top:20px;
+}
+
+.width90 {
+  width:90%;
+}
+.width80 {
+  width:80%;
+}
+
+.width50 {
+  width:50%;
+}
+
+.width45 {
+  width:45%;
+}
+
+.width33 {
+  width:33%;
+}
+
+.width10 {
+  width:10%;
+}
+
+.offset5 {
+  margin-left:5%;
+}
+
+.offset10 {
+  margin-left:10%;
+}
+
+.numberLabel {
+  width:50px;height:50px;background-color:#00A1CB;border-radius:25px;font-size:large;color:white;
+}
+
+.splashLabel {
+  width:80%;color:#00A1CB;font-size:large;
+}
+
+h3 {
+  color:#E6642D;
+}
+
+li {
+  font-size:medium;
+}
+
+.fnf-field {
+  width:90%;
+}
+
+button {
+  color:white;
+}
+
+.fnf-back1 {
+  background-color:white;
+}
+
+.fnf-button, .fnf-button:focus {
+  background-color:#00A1CB;
+  border-color:#00A1CB;
+  color:white;
+}
+
+.fnf-second-button, .fnf-second-button:focus {
+  background-color:#616161;
+  border-color:#616161;
+  color:white;
+}
+
+.fnf-button:hover {
+  background-color:#0091BB;
+  border-color:#0091BB;
+  color:white;
+}
+
+.fnf-second-button:hover {
+  background-color:#535448;
+  border-color:#535448;
+  color:white;
+}
+
+.fnf-button:active {
+  background-color:#0081AB;
+  border-color:#0081AB;
+  color:white;
+}
+
+.fnf-second-button:active {
+  background-color:#434438;
+  border-color:#434438;
+  color:white;
+}
+
+
+
+
+
+
+
 /* applies to anything of class "example-class-selector" */
 .example-class-selector {
 	margin-top: 2em;
@@ -55,3 +170,331 @@ body > div.container {
 .calendar {
      overflow:scroll;
 }
+
+
+
+
+
+
+
+
+
+/*
+ * File: common.css
+ * Date: April 29, 2014
+ *
+ * Description: This file holds the common css properties that
+ *     is similar to bootstrap but less extensive.
+ */
+
+/* The position of the element */
+/* The position of the element is not relative to the position other dom elements */
+.fixed {
+  position: fixed;
+}
+
+/* The position of the element is relative to the first ancestor element */
+.modal {
+  position: absolute;
+}
+
+/* The position is relative to its static position */
+.relative {
+  position: relative;
+}
+
+/* Has the same position as its parent */
+.inherit {
+  position: inherit;
+}
+
+/* Default position */
+.static {
+  position: static;
+}
+
+.hidden {
+  display: none;
+}
+/* Use when hidden doesn't work */
+.hidden.hiddenoverride {
+  display: none;
+}
+
+.invisible {
+  opacity: 0.0;
+}
+
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline-block;
+}
+
+/* Table Properties */
+
+/* No spacing */
+.condense {
+  margin: 0px;
+  border-spacing: 0px;
+  padding: 0px;
+}
+
+.whiteBackground {
+  background-color: white;
+}
+
+.blackBackground {
+  background-color: black;
+}
+
+.transparent {
+  background-color:transparent;
+}
+
+/* prepares the background image to full capacity of the viewing area */
+.backgroundImage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.full {
+  width: 100%;
+}
+
+.fullHeight {
+  height: 100%;
+}
+
+/* The curviness of the table's borders */
+.curve5 {
+  border-radius: 5px;
+}
+
+.curve10 {
+  border-radius: 10px;
+}
+
+.topCurve5 {
+  border-radius: 5px 5px 0px 0px;
+}
+
+.bottomCurve5 {
+  border-radius: 0px 0px 5px 5px;
+}
+
+/* Padding */
+.padd5 {
+  padding: 5px;
+}
+
+.padd10 {
+  padding: 10px;
+}
+
+.paddSide5 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.paddSide10 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.paddVert5 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.paddVert10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.margin5 {
+  margin: 5px;
+}
+
+.margin10 {
+  margin: 10px;
+}
+
+.up10 {
+  margin-top: 10px;
+}
+
+.up5 {
+  margin-top: 5px;
+}
+
+.down10 {
+  margin-bottom: 10px;
+}
+
+.down5 {
+  margin-bottom: 5px;
+}
+
+.right10 {
+  margin-right: 10px;
+}
+
+.right5 {
+  margin-right: 5px;
+}
+
+.left10 {
+  margin-left: 10px;
+}
+
+.left5 {
+  margin-left: 5px;
+}
+
+.left2p {
+  margin-left: 2%;
+}
+
+/* Vertical Alignment Arrangement */
+.top {
+  vertical-align: top;
+}
+
+.middle {
+  vertical-align: middle;
+}
+
+.bottom {
+  vertical-align: bottom;
+}
+
+/* Horizontal Alignment Arrangement */
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Text Styles */
+
+.smallText {
+  font-size: 80%;
+}
+
+.normalText {
+  font-size: 100%;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.italics {
+  font-style: italic;
+}
+
+.invisible {
+  opacity: 0;
+}
+
+/* Cursor Hover Types */
+.clickable:hover {
+  cursor: pointer;
+}
+
+.unclickable:hover {
+  pointer: default;
+}
+
+.waitable:hover {
+  cursor: wait;
+}
+
+.deniable {
+  cursor: not-allowed;
+}
+
+.unselectable:hover {
+  /* No selecting text */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.selectable:hover {
+  -webkit-touch-callout: text;
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Shading */
+
+.shaded {
+  -webkit-box-shadow: 0 0 5px #E0E0E0;
+  box-shadow: 0 0 5px #E0E0E0;
+}
+
+.shaded2 {
+  -webkit-box-shadow: 0 0 7px #D0D0D0;
+  box-shadow: 0 0 7px #D0D0D0;
+}
+
+.shadable:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 0 0 5px #E0E0E0;
+  box-shadow: 0 0 5px #E0E0E0;
+}
+
+/* A stronger shade on hover */
+.shadable2:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 0 0 7px #D0D0D0;
+  box-shadow: 0 0 7px #D0D0D0;
+}
+
+
+/* Table Div */
+.table {
+  display: table;
+}
+
+.row {
+  display: table-row;
+}
+
+.cell {
+  display: table-cell;
+}
+
+.restrictSelect {
+  display:block;
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+}
+
+.noText {
+  font-size:0%;
+}
+

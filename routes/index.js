@@ -1,16 +1,20 @@
 
 var models = require('../models');
+var std = require("../std");
 
 /*
  * GET home page.
  */
 
 exports.view = function(req, res){
+  res.render('index');
+  /*
     if (!req.session.user) {
       res.redirect("/login");
     } else {
     	res.render('index');
     }
+  */
 };
 
 
