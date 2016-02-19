@@ -21,6 +21,3 @@ function Calendar(id, type) {
 
 	$("#" + id).css("background-color", "#EEE");
 }
-
-
-cal.init()

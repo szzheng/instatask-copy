@@ -2,25 +2,14 @@
 
 <html>
 <head>
-	<title>Instatask</title>	
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!--<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">-->
-	<link href="/css/introHCI.css" rel="stylesheet">
-	<link href="/css/normalize.css" rel="stylesheet">
-	<link href="css/skeleton.css" rel="stylesheet">
-	<link href="css/login.css" rel="stylesheet">
-
-  <script src="https://code.jquery.com/jquery.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/introHCI.js"></script>      
+	<title>FRIENDSnFOOD</title>	
+	{{> headers}}
 </head>
 
 <body>
   <div class="container">
 		<div class = "row">
-			<h1>Instastart</h1>
+			<h1>FRIENDSnFOOD</h1>
 		</div>
 
         {{#if error}}
@@ -28,7 +17,6 @@
         {{/if}}
 
       <div class = "row form">
-      	<h5>Log In</h5>
 				<form method="post" action="login">
 				  <div class = "twelve columns ">
 		          	<input type="text" name="email" placeholder="email"></input>

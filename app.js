@@ -66,6 +66,14 @@ app.get('/logout', login.logoutPage);
 app.get('/welcome', login.welcomePage);
 app.get('/settings', login.settingsPage);
 app.post('/settings', login.settingsPage);
+app.get('/step1', login.step1Page);
+app.post('/step1', login.step1Page);
+app.get('/step2', login.step2Page);
+app.post('/step2', login.step2Page);
+app.get('/step3', login.step3Page);
+app.post('/step3', login.step3Page);
+app.get('/step4', login.step4Page);
+app.post('/step4', login.step4Page);
 
 
 app.get('/add', task.addTask);

@@ -31,8 +31,16 @@ exports.signupPage = function(req, res) {
 			    "name": req.body.name,
 				"email": req.body.email,
 				"password": req.body.pass,
-				"categories": [],
-				"locations": []
+                "imageUrl": "",
+                "attendence": 0,
+                "aamount": 0,
+                "rating": 0,
+                "ramount": 0,
+
+                "okayFriends": true,
+                "okayFOF": true,
+                "okayAny": false,
+                "needFriend": true
 		    }
 		);
 		req.session.user = newUser;
@@ -42,7 +50,7 @@ exports.signupPage = function(req, res) {
         	if (err) {
         		console.log(err);
         	}
-        	res.redirect('welcome');
+        	res.redirect('step1');
         }
         
     } else {
@@ -53,6 +61,23 @@ exports.signupPage = function(req, res) {
 exports.logoutPage = function(req, res) {
 	req.session.reset();
     res.render('logout');
+}
+
+// Steps pipeline
+exports.step1Page = function(req, res) {
+    res.render('step1');
+}
+
+exports.step2Page = function(req, res) {
+    res.render('step2');
+}
+
+exports.step3Page = function(req, res) {
+    res.render('step3');
+}
+
+exports.step4Page = function(req, res) {
+    res.render('step4');
 }
 
 exports.welcomePage = function(req, res) {
