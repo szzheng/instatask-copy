@@ -322,6 +322,7 @@ pre > code {
 
 /* Tables
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+/*
 th,
 td {
   padding: 12px 15px;
@@ -332,7 +333,7 @@ td:first-child {
   padding-left: 0; }
 th:last-child,
 td:last-child {
-  padding-right: 0; }
+  padding-right: 0; }*/
 
 
 /* Spacing
