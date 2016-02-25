@@ -27,34 +27,23 @@
 
  {{#each caltimes}}
  <tr>
-  <td>{{this}}AM</td>
-  <td class="lockedCell"></td>
-  <td class="lockedCell"></td>
-  <td></td>
+  <td>{{time}}</td>
+  <td class="firstDay {{timeIndex}} lockedCell"></td>
+  <td class="secondDay {{timeIndex}} lockedCell"></td>
+  <td class="thirdDay {{timeIndex}}"></td>
   <td></td>
  </tr><tr>
- <td></td>
-  <td class="lockedCell"></td>
-  <td class="lockedCell"></td>
-  
-  <td></td>
-  <td></td>
  </tr>
  {{/each}}
   {{#each caltimes2}}
  <tr>
-  <td>{{this}}AM</td>
-  <td class="lockedCell"></td>
-  <td class="lockedCell"></td>
-  <td></td>
+  <td>{{time}}</td>
+  <td class="firstDay {{timeIndex}} lockedCell"></td>
+  <td class="secondDay {{timeIndex}} lockedCell"></td>
+  <td class="thirdDay {{timeIndex}}"></td>
   <td></td>
   </tr><tr>
-  <td></td>
-  <td class="lockedCell"></td>
-  <td class="lockedCell"></td>
-  
-  <td></td>
-  <td></td>
+
  </tr>
  {{/each}}
 </table>
