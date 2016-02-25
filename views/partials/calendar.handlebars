@@ -1,53 +1,5 @@
 
 <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-<!--
-<script> 
-
-  var days = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
-  function shiftRightDay() {
-
-    var firstDay = $("#firstDay").text();
-    if (firstDay == days[0]) {
-      $("#firstDay").text(days[1]);
-      $("#secondDay").text(days[2]);
-      $("#thirdDay").text(days[3]);
-    } else if (firstDay == days[1]) {
-      $("#firstDay").text(days[2]);
-      $("#secondDay").text(days[3]);
-      $("#thirdDay").text(days[4]);
-    } else if (firstDay == days[2]) {
-      $("#firstDay").text(days[3]);
-      $("#secondDay").text(days[4]);
-      $("#thirdDay").text(days[5]);
-    } else if (firstDay == days[3]) {
-      $("#firstDay").text(days[4]);
-      $("#secondDay").text(days[5]);
-      $("#thirdDay").text(days[6]);
-    } 
-  }
-
-  function shiftLeftDay() {
-    var firstDay = $("#firstDay").text();
-    if (firstDay == days[1]) {
-      $("#firstDay").text(days[0]);
-      $("#secondDay").text(days[1]);
-      $("#thirdDay").text(days[2]);
-    } else if (firstDay == days[2]) {
-      $("#firstDay").text(days[1]);
-      $("#secondDay").text(days[2]);
-      $("#thirdDay").text(days[3]);
-    } else if (firstDay == days[3]) {
-      $("#firstDay").text(days[2]);
-      $("#secondDay").text(days[3]);
-      $("#thirdDay").text(days[4]);
-    } else if (firstDay == days[4]) {
-      $("#firstDay").text(days[3]);
-      $("#secondDay").text(days[4]);
-      $("#thirdDay").text(days[5]);
-    }
-  }
-
-</script>-->
 
 
 <table class="mcal full center" style="text-align:center;font-size:small">
@@ -63,11 +15,11 @@
 -->
 
  <tr>
-  <th id="backBtn">BACK</th>
-  <th id="firstDay">FRI</th>
-  <th id="secondDay">SAT</th>
-  <th id="thirdDay">SUN</th>
-  <th id="nextBtn">NEXT</th>
+  <th class="backBtn">BACK</th>
+  <th id="firstDayHeader1">FRI</th>
+  <th id="secondDayHeader1">SAT</th>
+  <th id="thirdDayHeader1">SUN</th>
+  <th class="nextBtn">NEXT</th>
  </tr>
 
  {{#each caltimes}}

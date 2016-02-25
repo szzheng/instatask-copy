@@ -17,6 +17,7 @@
 <div class="fnf-back1">
 
 <table class="mcal full center" style="text-align:center;font-size:small">
+<!--
  <tr>
   <th></th>
   <th>FRI<br>19</th>
@@ -24,12 +25,20 @@
   <th>SUN<br>21</th>
   <th>MON<br>22</th>
  </tr>
+-->
+ <tr>
+  <th class="backBtn">BACK</th>
+  <th id="firstDayHeader">FRI</th>
+  <th id="secondDayHeader">SAT</th>
+  <th id="thirdDayHeader">SUN</th>
+  <th class="nextBtn">NEXT</th>
+ </tr>
 
  {{#each caltimes}}
  <tr>
   <td>{{time}}</td>
-  <td class="firstDay {{timeIndex}} lockedCell"></td>
-  <td class="secondDay {{timeIndex}} lockedCell"></td>
+  <td class="firstDay {{timeIndex}}"></td>
+  <td class="secondDay {{timeIndex}}"></td>
   <td class="thirdDay {{timeIndex}}"></td>
   <td></td>
  </tr><tr>
@@ -38,8 +47,8 @@
   {{#each caltimes2}}
  <tr>
   <td>{{time}}</td>
-  <td class="firstDay {{timeIndex}} lockedCell"></td>
-  <td class="secondDay {{timeIndex}} lockedCell"></td>
+  <td class="firstDay {{timeIndex}}"></td>
+  <td class="secondDay {{timeIndex}}"></td>
   <td class="thirdDay {{timeIndex}}"></td>
   <td></td>
   </tr><tr>

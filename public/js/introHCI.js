@@ -83,9 +83,13 @@ $(document).ready(function() {
 		repopulateLockedData();
 
 		// setting up labels
-		$("#firstDay").text(days[firstDay]);
-		$("#secondDay").text(days[secondDay]);
-		$("#thirdDay").text(days[thirdDay]);
+		$("#firstDayHeader").text(days[firstDay]);
+		$("#secondDayHeader").text(days[secondDay]);
+		$("#thirdDayHeader").text(days[thirdDay]);
+
+		$("#firstDayHeader1").text(days[firstDay]);
+		$("#secondDayHeader1").text(days[secondDay]);
+		$("#thirdDayHeader1").text(days[thirdDay]);
 
 	}
 	initCalendarState();
@@ -93,35 +97,67 @@ $(document).ready(function() {
 	// handle back and next buttons
 	function shiftRightDay() {
 
-	    var firstDaySelector = $("#firstDay").text();
+	    var firstDaySelector = $("#firstDayHeader").text();
 	    console.log(firstDaySelector + "firstDaySelector");
 	    if (firstDaySelector == days[0]) {
-	      $("#firstDay").text(days[1]);
+	      $("#firstDayHeader").text(days[1]);
 	      firstDay = 1;
-	      $("#secondDay").text(days[2]);
+	      $("#secondDayHeader").text(days[2]);
 	      secondDay = 2;
-	      $("#thirdDay").text(days[3]);
+	      $("#thirdDayHeader").text(days[3]);
 	      thirdDay = 3;
 	    } else if (firstDaySelector == days[1]) {
-	      $("#firstDay").text(days[2]);
+	      $("#firstDayHeader").text(days[2]);
 	      firstDay = 2;
-	      $("#secondDay").text(days[3]);
+	      $("#secondDayHeader").text(days[3]);
 	      secondDay = 3;
-	      $("#thirdDay").text(days[4]);
+	      $("#thirdDayHeader").text(days[4]);
 	      thirdDay = 4;
 	    } else if (firstDaySelector == days[2]) {
-	      $("#firstDay").text(days[3]);
+	      $("#firstDayHeader").text(days[3]);
 	      firstDay = 3;
-	      $("#secondDay").text(days[4]);
+	      $("#secondDayHeader").text(days[4]);
 	      secondDay = 4;
-	      $("#thirdDay").text(days[5]);
+	      $("#thirdDayHeader").text(days[5]);
 	      thirdDay = 5;
 	    } else if (firstDaySelector == days[3]) {
-	      $("#firstDay").text(days[4]);
+	      $("#firstDayHeader").text(days[4]);
 	      firstDay = 4;
-	      $("#secondDay").text(days[5]);
+	      $("#secondDayHeader").text(days[5]);
 	      secondDay = 5;
-	      $("#thirdDay").text(days[6]);
+	      $("#thirdDayHeader").text(days[6]);
+	      thirdDay = 6;
+	    } 
+
+	    var firstDaySelector1 = $("#firstDayHeader1").text();
+	    console.log(firstDaySelector1 + "firstDaySelector1");
+	    if (firstDaySelector1 == days[0]) {
+	      $("#firstDayHeader1").text(days[1]);
+	      firstDay = 1;
+	      $("#secondDayHeader1").text(days[2]);
+	      secondDay = 2;
+	      $("#thirdDayHeader1").text(days[3]);
+	      thirdDay = 3;
+	    } else if (firstDaySelector1 == days[1]) {
+	      $("#firstDayHeader1").text(days[2]);
+	      firstDay = 2;
+	      $("#secondDayHeader1").text(days[3]);
+	      secondDay = 3;
+	      $("#thirdDayHeader1").text(days[4]);
+	      thirdDay = 4;
+	    } else if (firstDaySelector1 == days[2]) {
+	      $("#firstDayHeader1").text(days[3]);
+	      firstDay = 3;
+	      $("#secondDayHeader1").text(days[4]);
+	      secondDay = 4;
+	      $("#thirdDayHeader1").text(days[5]);
+	      thirdDay = 5;
+	    } else if (firstDaySelector1 == days[3]) {
+	      $("#firstDayHeader1").text(days[4]);
+	      firstDay = 4;
+	      $("#secondDayHeader1").text(days[5]);
+	      secondDay = 5;
+	      $("#thirdDayHeader1").text(days[6]);
 	      thirdDay = 6;
 	    } 
 
@@ -130,34 +166,65 @@ $(document).ready(function() {
 	}
 
 	function shiftLeftDay() {
-	    var firstDaySelector = $("#firstDay").text();
+	    var firstDaySelector = $("#firstDayHeader").text();
 	    if (firstDaySelector == days[1]) {
-	      $("#firstDay").text(days[0]);
+	      $("#firstDayHeader").text(days[0]);
 	      firstDay = 0;
-	      $("#secondDay").text(days[1]);
+	      $("#secondDayHeader").text(days[1]);
 	      secondDay = 1;
-	      $("#thirdDay").text(days[2]);
+	      $("#thirdDayHeader").text(days[2]);
 	      thirdDay = 2;
 	    } else if (firstDaySelector == days[2]) {
-	      $("#firstDay").text(days[1]);
+	      $("#firstDayHeader").text(days[1]);
 	      firstDay = 1;
-	      $("#secondDay").text(days[2]);
+	      $("#secondDayHeader").text(days[2]);
 	      secondDay = 2;
-	      $("#thirdDay").text(days[3]);
+	      $("#thirdDayHeader").text(days[3]);
 	      thirdDay = 3;
 	    } else if (firstDaySelector == days[3]) {
-	      $("#firstDay").text(days[2]);
+	      $("#firstDayHeader").text(days[2]);
 	      firstDay = 2;
-	      $("#secondDay").text(days[3]);
+	      $("#secondDayHeader").text(days[3]);
 	      secondDay = 3;
-	      $("#thirdDay").text(days[4]);
+	      $("#thirdDayHeader").text(days[4]);
 	      thirdDay = 4;
 	    } else if (firstDaySelector == days[4]) {
-	      $("#firstDay").text(days[3]);
+	      $("#firstDayHeader").text(days[3]);
 	      firstDay = 3;
-	      $("#secondDay").text(days[4]);
+	      $("#secondDayHeader").text(days[4]);
 	      secondDay = 4;
-	      $("#thirdDay").text(days[5]);
+	      $("#thirdDayHeader").text(days[5]);
+	      thirdDay = 5;
+	    }
+
+	    var firstDaySelector1 = $("#firstDayHeader1").text();
+	    if (firstDaySelector1 == days[1]) {
+	      $("#firstDayHeader1").text(days[0]);
+	      firstDay = 0;
+	      $("#secondDayHeader1").text(days[1]);
+	      secondDay = 1;
+	      $("#thirdDayHeader1").text(days[2]);
+	      thirdDay = 2;
+	    } else if (firstDaySelector1 == days[2]) {
+	      $("#firstDayHeader1").text(days[1]);
+	      firstDay = 1;
+	      $("#secondDayHeader1").text(days[2]);
+	      secondDay = 2;
+	      $("#thirdDayHeader1").text(days[3]);
+	      thirdDay = 3;
+	    } else if (firstDaySelector1 == days[3]) {
+	      $("#firstDayHeader1").text(days[2]);
+	      firstDay = 2;
+	      $("#secondDayHeader1").text(days[3]);
+	      secondDay = 3;
+	      $("#thirdDayHeader1").text(days[4]);
+	      thirdDay = 4;
+	    } else if (firstDaySelector1 == days[4]) {
+	      $("#firstDayHeader1").text(days[3]);
+	      firstDay = 3;
+	      $("#secondDayHeader1").text(days[4]);
+	      secondDay = 4;
+	      $("#thirdDayHeader1").text(days[5]);
 	      thirdDay = 5;
 	    }
 	    repopulateTimesData();
@@ -166,8 +233,10 @@ $(document).ready(function() {
 
 	// repopulate time slots after clicking back or next
 	function repopulateTimesData() {
-		console.log("repopulate data firstDay" + firstDay);
+		console.log(calendar.timesArray);
+
 		for (var i = 0; i < 32; i++) {
+			console.log("repopulate data firstDay" + firstDay);
 			if (calendar.timesArray[firstDay][i] == 0) {
 				$(".firstDay." + i).removeClass("freeCell");
 				$(".firstDay." + i).text("");
@@ -197,38 +266,31 @@ $(document).ready(function() {
 	// repopulate locked slots after clicking back or next
 	function repopulateLockedData() {
 		console.log("repopulateLockedData");
-		console.log("firstDay rep lock" + firstDay);
 		for (var i = 0; i < 32; i++) {
 			if (calendar.lockedTimesArray[firstDay][i] == 0) {
 				$(".firstDay." + i).removeClass("lockedCell");
-				console.log("Making first day unlocked");
 			} else {
-				console.log("Making  first day locked");
 				$(".firstDay." + i).addClass("lockedCell");
 			} 
 
 			if (calendar.lockedTimesArray[secondDay][i] == 0) {
 				$(".secondDay." + i).removeClass("lockedCell");
-				console.log("Making second day unlocked");
 			} else {
-				console.log("Making  second day locked");
 				$(".secondDay." + i).addClass("lockedCell");
 			}
 
 			if (calendar.lockedTimesArray[thirdDay][i] == 0) {
 				$(".thirdDay." + i).removeClass("lockedCell");
-				console.log("Making  third day unlocked");
 			} else {
 				$(".thirdDay." + i).addClass("lockedCell");
-				console.log("Making  third day locked");
 			}
 		}
 	}
 
-	$("#backBtn").click(function(e) {
+	$(".backBtn").click(function(e) {
 		shiftLeftDay();
 	});
-	$("#nextBtn").click(function(e) {
+	$(".nextBtn").click(function(e) {
 		shiftRightDay();
 	});
 
@@ -270,6 +332,10 @@ $(document).ready(function() {
 			}
 			$(e.target).toggleClass("freeCell");
 		}
+
+
+		repopulateTimesData();
+		repopulateLockedData();
 	});
 })
 
