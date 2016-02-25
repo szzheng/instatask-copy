@@ -63,7 +63,7 @@
 	<div class="underBar underSteps">
 		<div class="row">
 			<div class="cell clickable" style="width:10%">
-			<span style="margin-left:5px;"><button class="fnf-second-button" onclick="skip(5)">skip</button></span>
+			<span style="margin-left:5px;"><button class="fnf-second-button" onclick="skip(5);loadMainCalendar();bindMainClick();">skip</button></span>
 			</div>
 			<div class="cell center" style="width:80%">
 
@@ -74,7 +74,7 @@
 
 			</div>
 			<div class="cell" style="width:10%">
-				<button class="fnf-button" style="margin-right:4px;" onclick="skip(5)">finish</button>
+				<button class="fnf-button" style="margin-right:4px;" onclick="skip(5);loadMainCalendar();bindMainClick();">finish</button>
 			</div>
 			</div>
 		</div>
@@ -82,14 +82,14 @@
 	<div class="underBar underSettings4 hidden">
 		<div class="row">
 			<div class="cell clickable" style="width:10%">
-			<span style="margin-left:5px;"><button class="fnf-second-button" onclick="mains();swap(4);loadMainCalendar();">Cancel</button></span>
+			<span style="margin-left:5px;"><button class="fnf-second-button" onclick="mains();swap(4);loadMainCalendar(); bindMainClick;">Cancel</button></span>
 			</div>
 			<div class="cell center" style="width:80%">
 
 
 			</div>
 			<div class="cell" style="width:10%">
-				<button class="fnf-button" style="margin-right:4px;" onclick="mains();swap(4);loadMainCalendar();">Save</button>
+				<button class="fnf-button" style="margin-right:4px;" onclick="mains();swap(4);loadMainCalendar();bindMainClick;">Save</button>
 			</div>
 			</div>
 		</div>
