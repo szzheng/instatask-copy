@@ -31,7 +31,9 @@ function Calendar() {
 
 }
 var mainCalendar = new Calendar();
+mainCalendar.highlightText = "searching..."
 var defaultCalendar = new Calendar();
+defaultCalendar.highlightText = "available"
 var calendar;
 
 var firstDay;
@@ -99,12 +101,13 @@ function loadDefaultCalendar() {
 
 function setDefaultCalendar() {
 	//console.log(mainCalendar.timesArray)
+	/*
 	for (var i = 0; i < 7; i++) {
 		for (var j = 0; j < 32; j++) {
 			defaultCalendar.timesArray[i][j] = mainCalendar.timesArray[i][j];
 		}
-	}
-	//defaultCalendar.timesArray = (mainCalendar.timesArray).slice();
+	}*/
+	defaultCalendar.timesArray = (mainCalendar.timesArray).slice();
 	
 }
 // handle back and next buttons
@@ -251,7 +254,7 @@ function repopulateTimesData() {
 			$(".firstDay." + i).text("");
 		} else if (calendar.timesArray[firstDay][i] == 1) {
 			$(".firstDay." + i).addClass("freeCell");
-			$(".firstDay." + i).text("searching...");
+			$(".firstDay." + i).text(calendar.highlightText);
 		} 
 
 		if (calendar.timesArray[secondDay][i] == 0) {
@@ -259,7 +262,7 @@ function repopulateTimesData() {
 			$(".secondDay." + i).text("");
 		} else if (calendar.timesArray[secondDay][i] == 1) {
 			$(".secondDay." + i).addClass("freeCell");
-			$(".secondDay." + i).text("searching...");
+			$(".secondDay." + i).text(calendar.highlightText);
 		}
 
 		if (calendar.timesArray[thirdDay][i] == 0) {
@@ -267,7 +270,7 @@ function repopulateTimesData() {
 			$(".thirdDay." + i).text("");
 		} else if (calendar.timesArray[thirdDay][i] == 1) {
 			$(".thirdDay." + i).addClass("freeCell");
-			$(".thirdDay." + i).text("searching...");
+			$(".thirdDay." + i).text(calendar.highlightText);
 		}
 	}
 }
@@ -409,10 +412,8 @@ function bindMainClick() {
 }
 
 function bindDefaultClick() {
-	console.log("binding defaultCalendar");
 	$(".mcal td").unbind('click');
 	$(".mcal td").bind('click', (function(e) {
-		console.log("clicking");
 		// get day
 		var day = (($(e.target)).attr("class"))
 		day = day.split(' ')[0];
