@@ -1,5 +1,57 @@
+
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 <!--
+<script> 
+
+  var days = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+  function shiftRightDay() {
+
+    var firstDay = $("#firstDay").text();
+    if (firstDay == days[0]) {
+      $("#firstDay").text(days[1]);
+      $("#secondDay").text(days[2]);
+      $("#thirdDay").text(days[3]);
+    } else if (firstDay == days[1]) {
+      $("#firstDay").text(days[2]);
+      $("#secondDay").text(days[3]);
+      $("#thirdDay").text(days[4]);
+    } else if (firstDay == days[2]) {
+      $("#firstDay").text(days[3]);
+      $("#secondDay").text(days[4]);
+      $("#thirdDay").text(days[5]);
+    } else if (firstDay == days[3]) {
+      $("#firstDay").text(days[4]);
+      $("#secondDay").text(days[5]);
+      $("#thirdDay").text(days[6]);
+    } 
+  }
+
+  function shiftLeftDay() {
+    var firstDay = $("#firstDay").text();
+    if (firstDay == days[1]) {
+      $("#firstDay").text(days[0]);
+      $("#secondDay").text(days[1]);
+      $("#thirdDay").text(days[2]);
+    } else if (firstDay == days[2]) {
+      $("#firstDay").text(days[1]);
+      $("#secondDay").text(days[2]);
+      $("#thirdDay").text(days[3]);
+    } else if (firstDay == days[3]) {
+      $("#firstDay").text(days[2]);
+      $("#secondDay").text(days[3]);
+      $("#thirdDay").text(days[4]);
+    } else if (firstDay == days[4]) {
+      $("#firstDay").text(days[3]);
+      $("#secondDay").text(days[4]);
+      $("#thirdDay").text(days[5]);
+    }
+  }
+
+</script>-->
+
+
 <table class="mcal full center" style="text-align:center;font-size:small">
+<!--
  <tr>
   <th>BACK</th>
   <th>FRI<br>19</th>
@@ -8,29 +60,41 @@
   <th>NEXT</th>
  </tr>
 
+-->
+
+ <tr>
+  <th id="backBtn">BACK</th>
+  <th id="firstDay">FRI</th>
+  <th id="secondDay">SAT</th>
+  <th id="thirdDay">SUN</th>
+  <th id="nextBtn">NEXT</th>
+ </tr>
+
  {{#each caltimes}}
  <tr>
-  <td>{{this}}AM</td>
-  <td class="lockedCell"></td>
-  <td class="lockedCell"></td>
-  <td></td>
+  <td>{{time}}</td>
+  <td class="firstDay {{timeIndex}}"></td>
+  <td class="secondDay {{timeIndex}}"></td>
+  <td class="thirdDay {{timeIndex}}"></td>
   <td></td>
  </tr><tr>
+ <!--
  <td></td>
-  <td class="lockedCell"></td>
-  <td class="lockedCell"></td>
+  <td class="lockedCell firstDay"></td>
+  <td class="lockedCell secondDay"></td>
   
-  <td></td>
-  <td></td>
+  <td class="thirdDay"></td>
+  <td></td>-->
  </tr>
  {{/each}}
-  {{#each caltimes2}}
+ {{#each caltimes2}}
  <tr>
-  <td>{{this}}AM</td>
-  <td class="lockedCell"></td>
-  <td class="lockedCell"></td>
+  <td>{{time}}</td>
+  <td class="firstDay {{timeIndex}}"></td>
+  <td class="secondDay {{timeIndex}}"></td>
+  <td class="thirdDay {{timeIndex}}"></td>
   <td></td>
-  <td></td>
+  <!--
   </tr><tr>
   <td></td>
   <td class="lockedCell"></td>
@@ -38,775 +102,6 @@
   
   <td></td>
   <td></td>
- </tr>
+ </tr>-->
  {{/each}}
 </table>
--->
-<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-<script>
-  
-  /* fixed top row, left column */
-  $(document).ready(function(){
-    fnAdjustTable();
-  });
-
-  fnAdjustTable = function(){
-
-    var colCount = $('#firstTr>td').length; //get total number of column
-
-    var m = 0;
-    var n = 0;
-    var brow = 'mozilla';
-    
-    jQuery.each(jQuery.browser, function(i, val) {
-      if(val == true){
-        brow = i.toString();
-      }
-    });
-    
-    $('.tableHeader').each(function(i){
-      if (m < colCount){
-
-        if (brow == 'mozilla'){
-          $('#firstTd').css("width",$('.tableFirstCol').innerWidth());//for adjusting first td
-          $(this).css('width',$('#table_div td:eq('+m+')').innerWidth());//for assigning width to table Header div
-        }
-        else if (brow == 'msie'){
-          $('#firstTd').css("width",$('.tableFirstCol').width());
-          $(this).css('width',$('#table_div td:eq('+m+')').width()-2);//In IE there is difference of 2 px
-        }
-        else if (brow == 'safari'){
-          $('#firstTd').css("width",$('.tableFirstCol').width());
-          $(this).css('width',$('#table_div td:eq('+m+')').width());
-        }
-        else {
-          $('#firstTd').css("width",$('.tableFirstCol').width());
-          $(this).css('width',$('#table_div td:eq('+m+')').innerWidth());
-        }
-      }
-      m++;
-    });
-
-    $('.tableFirstCol').each(function(i){
-      if(brow == 'mozilla'){
-        $(this).css('height',$('#table_div td:eq('+colCount*n+')').outerHeight());//for providing height using scrollable table column height
-      }
-      else if(brow == 'msie'){
-        $(this).css('height',$('#table_div td:eq('+colCount*n+')').innerHeight()-2);
-      }
-      else {
-        $(this).css('height',$('#table_div td:eq('+colCount*n+')').height());
-      }
-      n++;
-    });
-    //function to support scrolling of title and first column
-    fnScroll = function(){
-        $('#divHeader').scrollLeft($('#table_div').scrollLeft());
-        $('#firstcol').scrollTop($('#table_div').scrollTop());
-    };
-  };
-  /* fixed top row, left column - END */
-
-  // types: 1 - walkthrough, 2 - main, 3 - default
-  function Calendar(id, type) {
-
-    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    var weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    var relativeDays = ["firstDay", "secondDay", "thirdDay", "fourthDay", "fifthDay", "sixthDay", "seventhDay"];
-
-    // define event handlers
-      $(".btn-next").click(shiftRight);
-      $(".btn-back").click(shiftLeft);
-      $("#table_div").scroll(tableScroll);
-      $(".btn-view").click(toggleViewingMode);
-      $
-    $(".btn-fillDefaults").click(fillDefaults);
-    $(".btn-setDefaults").click(setDefaults);
-
-      var defaultTimes = [];
-      var availableTimes = [];
-
-      var editMode = true;
-
-    // cell dimensions
-    this.timeSlotHeight;
-    this.weekDayWidth;
-    this.weekDayHeight;
-    this.hourWidth;
-
-    this.first_day;
-    this.type = type;
-    this.id = id;
-
-      this.currentMonth;
-      this.currentDate;
-
-    var d = new Date();
-
-    this.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    this.weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    this.relativeDays = ["firstDay", "secondDay", "thirdDay", "fourthDay", "fifthDay", "sixthDay", "seventhDay"];
-
-    this.preloadDay;
-
-    // JSON for available times
-    var JSONavailableTimes = '{ "availableTimes" : [' +
-      '{ "weekday":"5" , "date":"19", "month":"1", "time":"1" }' +
-      ']}';
-
-    // JSON for default times
-    var JSONdefaultTimes = '{ "defaultTimes" : [' +
-      '{ "weekday":"5" , "time":"2" },' +
-      '{ "weekday":"3" , "time":"7" }' +
-      ']}';
-
-    this.init = function () {
-      // set the date
-      if (type == 1 || type == 2) {
-        this.first_day = d.getDay();
-        this.currentMonth = d.getMonth();
-        this.currentDate = d.getDate();
-
-        for (i = 0; i < 7; i++) {
-          // calculate date expression
-          var date = new Date();
-          date.setDate(this.currentDate + i);
-          addDate(date);
-        }
-      } else {
-        // start on monday, end on sunday
-        for (i = 0; i < 7; i++) {
-          addDay((i + 1) % 7);
-        }
-      }
-
-      // adding column for time
-      for (var i = 0; i < 32; i++) {
-        addTime(i);
-      }
-
-      // add row of time slots
-      for (var i = 0; i < 32; i++) {
-        addTimeSlotRow(i);
-      }
-
-      // adding individual timeslots
-      for (var i = 0; i < 7; i++) {
-        var newDate = new Date();
-        newDate.setDate(d.getDate() + i);
-        //console.log(newDate.getDate());
-        if (type == 3) {
-          addTimeSlot(i, i, i);
-        } else {
-          addTimeSlot(((i + this.currentDate) % 7), newDate.getDate(), newDate.getMonth());
-        }
-      }
-
-      // bind event handlers to dynamically created elements
-      disableSelection();
-      if (editMode) {
-        enableSelection();  
-      }
-
-      if (type == 1 || type == 2) {
-        $("#firstTd").append('<button class="btn btn-fillDefaults">Fill Defaults</button>');
-      } else {
-        $("#firstTd").append('<button class="btn btn-setDefaults">Set Defaults</button>');
-      }
-
-    }
-    this.init();
-
-    function populateCalendar(times) {
-      console.log("populate calendar");
-      // available times
-      if (type == 1 || type == 2) {
-        times = times["availableTimes"];
-        for (var i = 0; i < times.length; i++) {
-          var hourlyTime = times[i].time;
-          var date = times[i].date;
-          var weekday = times[i].weekday;
-          var month = times[i].month;
-
-          var fillBox = $("." + hourlyTime + " ." + weekday + "." + date + "." + month);
-
-          // preserve width
-          var currentWidth = $(".timeSlotTable td").css("width");
-
-          var currentClasses = fillBox.attr("class");
-          fillBox.attr("class", currentClasses + " selected");
-
-          var textFormat = months[month] + " " + (date) + ", " + convertIndexToTime(hourlyTime);
-          //var textFormat = month + " " + date + " " + hourlyTime;
-
-          // identifer for available times
-          fillBox.text(textFormat);
-
-          // restore width
-          fillBox.css("width", currentWidth);
-        }
-      } else {
-        times = times["defaultTimes"];
-        
-        for (var i = 0; i < times.length; i++) {
-          var hourlyTime = times[i].time;
-          var weekday = times[i].weekday;
-
-          var fillBox = $("." + hourlyTime + " ." + weekday);
-
-          // preserve width
-          var currentWidth = $(".timeSlotTable td").css("width");
-
-          var currentClasses = fillBox.attr("class");
-          fillBox.attr("class", currentClasses + " selected");
-
-
-          var textFormat = weekDays[weekday] + ", " + convertIndexToTime(hourlyTime);
-
-          // identifer for available times
-          fillBox.text(textFormat);
-
-          // restore width
-          fillBox.css("width", currentWidth);
-        }
-      }
-    }
-
-    // calendar 3
-    function addDay(day) {
-      var headerRow = $(".headerRow");
-      var timeSlotRow = $(".timeSlowRow");
-      headerRow.append('<td><div class="tableHeader firstDay">' +
-        weekDays[day] + '</div></td>');
-    }
-
-    // calendar 1 and 2
-    function addDate(date) {
-      var weekDay = date.getDay();
-      weekDay = weekDays[weekDay];
-      var month = date.getMonth();
-      month = months[month];
-      var dateNumber = date.getDate();
-
-      var divHeaderWidth = $(".tableHeader.firstDay").width();
-
-      var headerRow = $(".headerRow");
-
-      headerRow.append('<td><div class="tableHeader firstDay">' + 
-        (weekDay + "\n" + month + " " + dateNumber) + '</div></td>');
-    }
-
-    function addTimeSlotRow(row) {
-      var hour = Math.floor((7 + row/2)) % 12;
-      var minute;
-      var dayTime = 'am';
-      if (hour == 0) {
-        hour = 12;
-      }
-      if (row >= 10) {
-        dayTime = 'pm';
-      }
-      if (!(row % 2)) {
-        minute = '';
-      } else {
-        minute = ':30';
-      }
-
-      if (row == 0) {
-        $(".timeSlotTable").append('<tr id="firstTr" class="timeSlotRow ' + row + '"' + '></tr>');
-      } else {
-        $(".timeSlotTable").append('<tr class="timeSlotRow ' + row + '"' + '></tr>');
-      }
-    }
-
-    function addTimeSlot(weekDay, date, month) {
-      var timeSlot = $(".timeSlotRow");
-      // date, month do not matter
-      if (type == 1 || type == 2) {
-        timeSlot.append('<td class="timeSlot ' + weekDay + " " + date + " " + month + 
-          '";">&nbsp;</td>');
-      } else {
-        timeSlot.append('<td class="timeSlot ' + weekDay + '";">&nbsp;</td>');
-      }
-    }
-
-    function addTime(i) {
-      var hour = Math.floor((7 + i/2)) % 12;
-      var minute;
-      var dayTime = 'am';
-      if (hour == 0) {
-        hour = 12;
-      }
-      if (i >= 10) {
-        dayTime = 'pm';
-      }
-      if (!(i % 2)) {
-        minute = '';
-      } else {
-        minute = '';
-        hour = '';
-        dayTime = '';
-      }
-
-      var timeLabel = hour + minute + " " + dayTime;
-      $(".timeCol").append('<tr><td id="' + i + '" class="tableFirstCol time">' + 
-        hour + minute + " " + dayTime + '</td></tr>')
-    }
-
-    var week = 0;
-
-    function setDefaults(e) {
-      for (var i = 0; i < defaultTimes.length; i++) {
-        console.log(defaultTimes[i]);
-      }
-
-    }
-    function fillDefaults(e) {
-      var times = JSON.parse(JSONdefaultTimes);
-      times = times["defaultTimes"];
-      
-      var date = new Date();
-      currentMonthDate = date.getDate();
-      currentWeekDay = date.getDay();
-
-      for (var i = 0; i < times.length; i++) {
-        var hourlyTime = times[i].time;
-        var weekday = times[i].weekday;
-
-        // calculate month and date
-        var weekDayOffset = weekday - currentWeekDay;
-        var adjustedDate = new Date();
-        adjustedDate.setDate(currentMonthDate + weekDayOffset);
-        var adjustedMonth = adjustedDate.getMonth()
-
-        var fillBox = $("." + hourlyTime + " ." + weekday + "." + (currentMonthDate + weekDayOffset) + "." + adjustedMonth);
-
-        // preserve width
-        var currentWidth = $(".timeSlotTable td").css("width");
-
-        var currentClasses = fillBox.attr("class");
-        fillBox.attr("class", currentClasses + " selected");
-
-
-        var textFormat = months[adjustedMonth] + " " + (currentMonthDate + weekDayOffset) + ", " + convertIndexToTime(hourlyTime);
-
-        // identifer for available times
-        fillBox.text(textFormat);
-
-        // restore width
-        fillBox.css("width", currentWidth);
-        //console.log(fillBox.className + "className");
-      }
-    }
-
-    function convertIndexToTime(index) {
-      var hour = Math.floor((7 + index/2)) % 12;
-      var minute;
-      var dayTime = 'am';
-
-      if (hour == 0) {
-        hour = 12;
-      }
-      if (index >= 10) {
-        dayTime = 'pm';
-      }
-      if (!(index % 2)) {
-        minute = '';
-      } else {
-        minute = ':30';
-      }
-
-      var timeLabel = hour + minute + " " + dayTime;
-      return timeLabel;
-    }
-
-    /* Format table */
-    var width = $("#" + id).width() - $("#firstcol").width();
-    $("#table_div").css("width", width + "px");
-    $("#divHeader").css("width", width + "px");
-
-    var height = ($("#" + id).height() - $("#firstTd").height());
-    $("#" + id).css("height", (height + $(".btn-back").outerHeight() + "px");
-    $("#firstcol").css("height", height + "px");
-    $("#table_div").css("height", height + "px");
-
-
-
-    // populate with available times
-    if (type == 1 || (type == 2)) {
-      var times = JSON.parse(JSONavailableTimes);
-      populateCalendar(times);
-
-    // populate with default times
-    } else {
-      var times = JSON.parse(JSONdefaultTimes);
-      populateCalendar(times);
-    }
-
-
-
-    function toggleViewingMode(e) {
-      if ($(this).text() === "View") {
-        $(this).text('Edit');
-        disableSelection();
-      } else {
-        $(this).text('View');
-        disableSelection();
-        enableSelection();
-      }
-      editMode = !editMode;
-    }
-
-    function DateData(day, date, month) {
-      this.date = date;
-      this.month = month;
-      this.day = day;
-    }
-
-    var count = 0;
-    var preloadDates = [];
-
-    var currentPosition = 0;
-
-    function preloadDay() {
-      if (type != 3) {
-        console.log("Preloading day");
-
-        // preload day data
-        var day = new Date();
-        var currentDate = day.getDate();
-        day.setDate(currentDate + 7 + count);
-        var preloadDate = day.getDate();
-        var preloadDay = day.getDay();
-        var preloadMonth = day.getMonth();
-        var dateData = new DateData(preloadDay, preloadDate, preloadMonth);
-        preloadDates.push(dateData);
-
-          var getDate = preloadDates[count];
-          var weekDay = getDate["day"];
-          var month = getDate["month"];
-          var date = getDate["date"];
-
-          // preserve width
-        var divHeaderWidth = $(".tableHeader.firstDay").width();
-        console.log($(".tableHeader.firstDay").attr("class"));
-
-        var divHeaderHTML = 
-          '<td><div class="tableHeader preloadDay" style="width: ' + divHeaderWidth +
-          'px;">' + weekDays[weekDay] + "\n" +
-           months[month] + " " + date +
-          '</div></td>';
-
-        // restore width
-        $(".tableHeader preloadDay").css("width", divHeaderWidth);
-
-
-        $(".headerRow").append(divHeaderHTML);
-        addTimeSlot(weekDay, date, month);
-
-
-        var divHeaderWidth = $(".tableHeader.firstDay").width();
-        var tableDivWidth = $("#table_div").width();
-    
-        // expand width of table
-        var headerTable = $(".headerTable");
-        var timeSlotTable = $(".timeSlotTable");
-        timeSlotTable.css("width", headerTable.css("width"));
-
-        count++;
-      }
-
-    }
-
-    // handle full day shift left
-    function shiftLeft(e) {
-      // move position of scroll
-      var timeSlots = $("#table_div")
-      var columnWidth = $("#divHeader td").width();
-      if (currentPosition <= columnWidth) {
-        currentPosition = 0;
-      } else {
-        currentPosition = currentPosition - columnWidth;
-      }
-      timeSlots.scrollLeft(currentPosition);
-    }
-
-    // handle full day shift right
-    function shiftRight(e) {
-      var columnWidth = $("#divHeader td").width();
-
-
-      if ((currentPosition / columnWidth) > count) {
-        // preload day data
-        preloadDay();
-      }
-
-
-      // move position of scroll
-      var timeSlots = $("#table_div")
-      currentPosition = currentPosition + columnWidth;
-      //console.log("currentPosition" + currentPosition);
-      timeSlots.scrollLeft(currentPosition);
-
-
-      // allow dynamically created cells to be selected
-      disableSelection();
-      if (editMode) {
-        enableSelection();  
-      }
-    }
-
-    // handle scrolling
-    function tableScroll(e) {
-
-      var columnWidth = $("#divHeader td").width();
-      var scrollPosition = $("#table_div").scrollLeft();
-
-      // preload day
-      // number of days loaded corresponds to the current day the user is viewing
-      currentPosition = scrollPosition;
-      if ((currentPosition / columnWidth) > count) {
-        // preload day data
-        preloadDay();
-      }
-
-      // allow dynamically created cells to be selected
-      disableSelection();
-      console.log(editMode)
-      if (editMode) {
-        enableSelection();  
-      }
-    }
-
-    function disableSelection() {
-      //console.log("disable selection called");
-      $("td.timeSlot").unbind("click");
-    }
-    function enableSelection() {
-      //console.log("enable selection called");
-      // bind event handlers to dynamically created elements
-      $("td.timeSlot").bind("click", selectTime);
-      function selectTime (event){
-
-        // add 
-        if (!$(this).hasClass("selected")) {
-          // preserve width
-          var currentWidth = $(this).width();
-
-
-          var currentClasses = $(this).attr("class");
-          $(this).attr("class", currentClasses + " selected");
-
-          // Append to available times
-          if (type == 1 || type == 2) {
-            var weekday = ($(this).attr("class")).split(' ')[1];
-            var date = ($(this).attr("class")).split(' ')[2];
-            var month = ($(this).attr("class")).split(' ')[3];
-            var time = ($(this).closest('.timeSlotRow'));
-            time = (time.attr("class")).split(' ')[1];
-            var textFormat = month + " " + date + " " + time;
-
-            var availableTime = {
-              "weekday": weekday,
-              "date": date,
-              "month": month,
-              "time": time
-            }
-
-
-            var json_data = JSON.stringify(availableTime);
-            availableTimes.push(availableTime);
-
-
-            var textFormat = months[month] + " " + date + ", " + convertIndexToTime(time);
-
-            fillHour(time, weekday, date, month);
-
-          // append to default times
-          } else {
-            var weekday = ($(this).attr("class")).split(' ')[1];
-            var time = ($(this).closest('.timeSlotRow'));
-            time = (time.attr("class")).split(' ')[1];
-
-            var defaultTime = {
-              "weekday": weekday,
-              "time": time
-            }
-
-            var json_data = JSON.stringify(defaultTime);
-            defaultTimes.push(defaultTime);
-
-            var textFormat = weekDays[weekday] + ", " + convertIndexToTime(time);
-            fillHour(time, weekday);
-
-          }
-          // identifer for available times
-          $(this).text(textFormat);
-
-          // restore width
-          $(this).css("width", currentWidth + "px");
-
-        // delete time
-        } else {
-          // Remove availability
-          $(this).removeClass("selected");
-
-          // Reset and refill available times
-          if (type == 1 || type == 2) {
-            availableTimes = [];
-            $(".selected").each(function() {
-              var weekday = (this.className).split(' ')[1];
-              var date = ($(this).attr("class")).split(' ')[2];
-              var month = ($(this).attr("class")).split(' ')[3];
-              var time = ($(this).closest('.timeSlotRow'));
-              time = (time.attr("class")).split(' ')[1];
-              var availableTime = {
-                "weekday": weekday,
-                "date": date,
-                "month": month,
-                "time": time
-              }
-              var json_data = JSON.stringify(availableTime);
-              availableTimes.push(availableTime);
-
-            });
-
-          // Reset and refill default times
-          } else {
-            defaultTimes = [];
-            $(".available").each(function() {
-              var weekday = (this.className).split(' ')[1];
-              var time = ($(this).closest('.timeSlotRow'));
-              time = (time.attr("class")).split(' ')[1];
-              var availableTime = {
-                "weekday": weekday,
-                "time": time
-              }
-              var json_data = JSON.stringify(defaultTime);
-              defaultTimes.push(defaultTime);
-            });
-
-          }
-
-          $(this).text("");
-
-
-        }
-      };
-
-      function fillHour(time, weekday, date, month) {
-        // Fill hour if necessary
-
-        var secondHalf;
-        if (!(time % 2)) {
-          secondHalf = Number(time) + 1;
-        } else {
-          secondHalf = Number(time) - 1;
-        }
-
-        var fillBox;
-        if (type == 1 || type == 2) {
-          fillBox = $("." + secondHalf + " ." + weekday + "." + date + "." + month);
-        } else {
-          fillBox = $("." + secondHalf + " ." + weekday);
-        }
-
-        // add time if it isn't already
-        if (!fillBox.hasClass("selected")) {
-          var currentClasses = fillBox.attr("class");
-          fillBox.attr("class", currentClasses + " selected");
-
-
-          // Append to available times
-          if (type == 1 || type == 2) {
-            var weekday = (fillBox.attr("class")).split(' ')[1];
-            var date = (fillBox.attr("class")).split(' ')[2];
-            var month = (fillBox.attr("class")).split(' ')[3];
-            var time = (fillBox.closest('.timeSlotRow'));
-            time = (time.attr("class")).split(' ')[1];
-            var availableTime = {
-              "weekday": weekday,
-              "date": date,
-              "month": month,
-              "time": time
-            }
-            var json_data = JSON.stringify(availableTime);
-            availableTimes.push(availableTime);
-            var textFormat = months[month] + " " + date + ", " + convertIndexToTime(time);
-          } else {
-            var weekday = (fillBox.attr("class")).split(' ')[1];
-            var time = (fillBox.closest('.timeSlotRow'));
-            time = (time.attr("class")).split(' ')[1];
-            var defaultTime = {
-              "weekday": weekday,
-              "time": time
-            }
-            var json_data = JSON.stringify(defaultTime);
-            defaultTimes.push(defaultTime);
-
-            var textFormat = weekDays[weekday] + ", " + convertIndexToTime(time);
-          }
-          // preserve width
-          var currentWidth = fillBox.width();
-          // identifer for available times
-          fillBox.text(textFormat);
-
-          // restore height
-          fillBox.css("width", currentWidth + "px");
-        } 
-      }
-      
-    }
-
-
-  }
-
-</script>
-
-<div id="calendar" class="calendar">
-
-  <table class="calendarTable" cellspacing="0" cellpadding="0" border="0" >
-    <tr>
-      <td id="firstTd">
-        <button class="btn btn-back">Back</button>
-      <button class="btn btn-next">Next</button>
-      <button class="btn btn-view">View</button>
-      </td>
-
-      <!-- column for all days -->
-      <td>
-        <div id="divHeader">
-          <!-- separate table for top row -->
-          <table class="headerTable" cellspacing="0" cellpadding="0" border="0" width="200%">
-            <tr class="headerRow">
-            </tr>
-          </table>
-        </div>
-      </td>
-    </tr>
-
-    <!-- row to house all times -->
-    <tr>
-    
-      <!-- times column -->
-      <td valign="top">
-        <div id="firstcol">
-          <table class="timeCol" width="70 px" cellspacing="0" cellpadding="0" border="1" >
-            
-          </table>
-        </div>
-      </td>
-      
-      <!-- column to house all time slots -->
-      <td valign="top">
-        <div id="table_div" onscroll="fnScroll()" >
-          <table class="timeSlotTable" width="200%" height="150%" cellspacing="0" cellpadding="0" border="1" >
-           
-          </table>
-        </div>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<script>var cal = new Calendar("calendar", 3);</script>

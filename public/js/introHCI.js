@@ -20,16 +20,260 @@ $(document).ready(function() {
 	  $("#mainShadow").width( $(window).width() );
 	});
 
-	$(".mcal td").click(function(e) {
-		var t = $(e.target);
-		if (!$(e.target).hasClass("freeCell")) {
-			$(e.target).text("searching...");
+	
+	// Create a calendar array
+	function Calendar() {
+  		this.timesArray = new Array();
+
+    	for (var i = 0; i < 7; i++) {
+
+ 	    	var times = [];
+    	  	for (var j = 0; j < 32; j++) {
+        	times.push(0);
+      		}
+
+      		this.timesArray.push(times);
+
+    	}
+
+    	this.lockedTimesArray = new Array();
+    	for (var i = 0; i < 7; i++) {
+
+ 	    	var times = [];
+    	  	for (var j = 0; j < 32; j++) {
+        	times.push(0);
+      		}
+
+      		this.lockedTimesArray.push(times);
+
+    	}
+    
+	}
+	var calendar = new Calendar();
+
+
+	var firstDay;
+	var secondDay;
+	var thirdDay;
+	var days = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+
+	// initialize the calendar state
+	function initCalendarState() {
+
+		var date = new Date();
+		var day = date.getDay();
+		if (day > 1) {
+			day = day - 1;
 		} else {
-			$(e.target).text("");
+			day = 6;
 		}
-		$(e.target).toggleClass("freeCell");
+		firstDay = day;
+		secondDay = firstDay + 1;
+		thirdDay = secondDay + 1;
+
+		//set locked days on calendar times array
+		for (var i = 0; i < 32; i++) {
+		  for (var j = secondDay; j >= 0; j--) {
+		  	calendar.lockedTimesArray[j][i] = 1;
+		  }
+		}
+
+		console.log(calendar.lockedTimesArray);
+		repopulateTimesData();
+		repopulateLockedData();
+
+		// setting up labels
+		$("#firstDay").text(days[firstDay]);
+		$("#secondDay").text(days[secondDay]);
+		$("#thirdDay").text(days[thirdDay]);
+
+	}
+	initCalendarState();
+
+	// handle back and next buttons
+	function shiftRightDay() {
+
+	    var firstDaySelector = $("#firstDay").text();
+	    console.log(firstDaySelector + "firstDaySelector");
+	    if (firstDaySelector == days[0]) {
+	      $("#firstDay").text(days[1]);
+	      firstDay = 1;
+	      $("#secondDay").text(days[2]);
+	      secondDay = 2;
+	      $("#thirdDay").text(days[3]);
+	      thirdDay = 3;
+	    } else if (firstDaySelector == days[1]) {
+	      $("#firstDay").text(days[2]);
+	      firstDay = 2;
+	      $("#secondDay").text(days[3]);
+	      secondDay = 3;
+	      $("#thirdDay").text(days[4]);
+	      thirdDay = 4;
+	    } else if (firstDaySelector == days[2]) {
+	      $("#firstDay").text(days[3]);
+	      firstDay = 3;
+	      $("#secondDay").text(days[4]);
+	      secondDay = 4;
+	      $("#thirdDay").text(days[5]);
+	      thirdDay = 5;
+	    } else if (firstDaySelector == days[3]) {
+	      $("#firstDay").text(days[4]);
+	      firstDay = 4;
+	      $("#secondDay").text(days[5]);
+	      secondDay = 5;
+	      $("#thirdDay").text(days[6]);
+	      thirdDay = 6;
+	    } 
+
+	    repopulateTimesData();
+	    repopulateLockedData();
+	}
+
+	function shiftLeftDay() {
+	    var firstDaySelector = $("#firstDay").text();
+	    if (firstDaySelector == days[1]) {
+	      $("#firstDay").text(days[0]);
+	      firstDay = 0;
+	      $("#secondDay").text(days[1]);
+	      secondDay = 1;
+	      $("#thirdDay").text(days[2]);
+	      thirdDay = 2;
+	    } else if (firstDaySelector == days[2]) {
+	      $("#firstDay").text(days[1]);
+	      firstDay = 1;
+	      $("#secondDay").text(days[2]);
+	      secondDay = 2;
+	      $("#thirdDay").text(days[3]);
+	      thirdDay = 3;
+	    } else if (firstDaySelector == days[3]) {
+	      $("#firstDay").text(days[2]);
+	      firstDay = 2;
+	      $("#secondDay").text(days[3]);
+	      secondDay = 3;
+	      $("#thirdDay").text(days[4]);
+	      thirdDay = 4;
+	    } else if (firstDaySelector == days[4]) {
+	      $("#firstDay").text(days[3]);
+	      firstDay = 3;
+	      $("#secondDay").text(days[4]);
+	      secondDay = 4;
+	      $("#thirdDay").text(days[5]);
+	      thirdDay = 5;
+	    }
+	    repopulateTimesData();
+	    repopulateLockedData();
+	}
+
+	// repopulate time slots after clicking back or next
+	function repopulateTimesData() {
+		console.log("repopulate data firstDay" + firstDay);
+		for (var i = 0; i < 32; i++) {
+			if (calendar.timesArray[firstDay][i] == 0) {
+				$(".firstDay." + i).removeClass("freeCell");
+				$(".firstDay." + i).text("");
+			} else if (calendar.timesArray[firstDay][i] == 1) {
+				$(".firstDay." + i).addClass("freeCell");
+				$(".firstDay." + i).text("searching...");
+			} 
+
+			if (calendar.timesArray[secondDay][i] == 0) {
+				$(".secondDay." + i).removeClass("freeCell");
+				$(".secondDay." + i).text("");
+			} else if (calendar.timesArray[secondDay][i] == 1) {
+				$(".secondDay." + i).addClass("freeCell");
+				$(".secondDay." + i).text("searching...");
+			}
+
+			if (calendar.timesArray[thirdDay][i] == 0) {
+				$(".thirdDay." + i).removeClass("freeCell");
+				$(".thirdDay." + i).text("");
+			} else if (calendar.timesArray[thirdDay][i] == 1) {
+				$(".thirdDay." + i).addClass("freeCell");
+				$(".thirdDay." + i).text("searching");
+			}
+		}
+	}
+
+	// repopulate locked slots after clicking back or next
+	function repopulateLockedData() {
+		console.log("repopulateLockedData");
+		console.log("firstDay rep lock" + firstDay);
+		for (var i = 0; i < 32; i++) {
+			if (calendar.lockedTimesArray[firstDay][i] == 0) {
+				$(".firstDay." + i).removeClass("lockedCell");
+				console.log("Making first day unlocked");
+			} else {
+				console.log("Making  first day locked");
+				$(".firstDay." + i).addClass("lockedCell");
+			} 
+
+			if (calendar.lockedTimesArray[secondDay][i] == 0) {
+				$(".secondDay." + i).removeClass("lockedCell");
+				console.log("Making second day unlocked");
+			} else {
+				console.log("Making  second day locked");
+				$(".secondDay." + i).addClass("lockedCell");
+			}
+
+			if (calendar.lockedTimesArray[thirdDay][i] == 0) {
+				$(".thirdDay." + i).removeClass("lockedCell");
+				console.log("Making  third day unlocked");
+			} else {
+				$(".thirdDay." + i).addClass("lockedCell");
+				console.log("Making  third day locked");
+			}
+		}
+	}
+
+	$("#backBtn").click(function(e) {
+		shiftLeftDay();
+	});
+	$("#nextBtn").click(function(e) {
+		shiftRightDay();
+	});
+
+
+
+
+
+	$(".mcal td").click(function(e) {
+		// get day
+		var day = (($(e.target)).attr("class"))
+		day = day.split(' ')[0];
+		if (day == "firstDay") {
+			day = firstDay;
+		} else if (day == "secondDay") {
+			day = secondDay;
+		} else {
+			day = thirdDay;
+		}
+		console.log("getting day " + day);
+		// get time
+		var time = (($(e.target)).attr("class"))
+		time = time.split(' ')[1];
+		console.log("getting time " + time);
+
+
+
+		var t = $(e.target);
+		if (!$(e.target).hasClass("lockedCell")) {
+			if (!$(e.target).hasClass("freeCell")) {
+				$(e.target).text("searching...");
+
+				// Note on calendar
+				calendar.timesArray[day][time] = 1;
+
+			} else {
+				$(e.target).text("");
+				// Note on calendar
+				calendar.timesArray[day][time] = 0;
+			}
+			$(e.target).toggleClass("freeCell");
+		}
 	});
 })
+
+
 
 /*
  * Function that is called when the document is ready.
