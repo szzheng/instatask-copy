@@ -437,6 +437,13 @@ function diningLocations() {
 	skip(2);
 }
 
+function defaultWeeklyCalendar() {
+	$(".whiteGreen").hide();
+	$(".underSteps").hide();
+	$(".underSettings4").show();
+	skip(4);
+}
+
 function sendStep1(after) {
 	if ($("#step1_req").is(":checked") && !$("#step1_f").is(":checked")) {
 		alert("Friends needs to be checked if you require at least one friend at each meetup.");
