@@ -31,7 +31,7 @@ function Calendar() {
 
 }
 var mainCalendar = new Calendar();
-mainCalendar.highlightText = "searching..."
+mainCalendar.highlightText = "?"
 var defaultCalendar = new Calendar();
 defaultCalendar.highlightText = "available"
 var calendar;
@@ -346,9 +346,9 @@ $(document).ready(function() {
 		time = time.split(' ')[1];
 
 		var t = $(e.target);
-		if (!$(e.target).hasClass("lockedCell")) {
+		//if (!$(e.target).hasClass("lockedCell")) {
 			if (!$(e.target).hasClass("freeCell")) {
-				$(e.target).text("searching...");
+				$(e.target).text("?");
 
 				// Note on calendar
 				calendar.timesArray[day][time] = 1;
@@ -359,7 +359,7 @@ $(document).ready(function() {
 				calendar.timesArray[day][time] = 0;
 			}
 			$(e.target).toggleClass("freeCell");
-		}
+		//}
 
 
 		repopulateTimesData();
@@ -389,9 +389,9 @@ function bindMainClick() {
 
 
 		var t = $(e.target);
-		if (!$(e.target).hasClass("lockedCell")) {
+		//if (!$(e.target).hasClass("lockedCell")) {
 			if (!$(e.target).hasClass("freeCell")) {
-				$(e.target).text("searching...");
+				$(e.target).text("?");
 				console.log($(e.target).text());
 
 				// Note on calendar
@@ -403,7 +403,7 @@ function bindMainClick() {
 				calendar.timesArray[day][time] = 0;
 			}
 			$(e.target).toggleClass("freeCell");
-		}
+		//}
 
 
 		repopulateTimesData();
@@ -431,7 +431,7 @@ function bindDefaultClick() {
 
 
 		var t = $(e.target);
-		if (!$(e.target).hasClass("lockedCell")) {
+		//if (!$(e.target).hasClass("lockedCell")) {
 			if (!$(e.target).hasClass("freeCell")) {
 				$(e.target).text("Available");
 				console.log($(e.target).text());
@@ -445,7 +445,7 @@ function bindDefaultClick() {
 				calendar.timesArray[day][time] = 0;
 			}
 			$(e.target).toggleClass("freeCell");
-		}
+		//}
 
 
 		repopulateTimesData();
